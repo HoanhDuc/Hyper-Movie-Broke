@@ -1,0 +1,14 @@
+{
+  "Home": {
+    "user":{
+      "title": "Front-End Developer",
+      "address": "Ha Noi Capital, Viet Nam"
+    },
+    "overview":{
+      "title":"Overview",
+      "ov1":"- I have over 3 years in web development. Over 3 past years, I can work with Vue, Nuxt, React, Next and Svelte...",
+      "ov2":"- Strengths: Front-end technology, build project (Vue, Nuxt, Next, Webpack), learn new library or framework",
+      "ov3":"- I'd like to learn new technology and work on big project"
+    }
+  }
+}

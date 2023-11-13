@@ -1,0 +1,14 @@
+{
+  "Home": {
+    "user": {
+      "title": "Lập trình viên Front-End",
+      "address": "Thành phố Hà Nội, Việt Nam"
+    },
+    "overview": {
+      "title": "Tổng quan",
+      "ov1": "- Tôi có hơn 3 năm phát triển web. Trong hơn 3 năm qua, tôi có thể làm việc với Vue, Nuxt, React, Next và Svelte...",
+      "ov2": "- Điểm mạnh: Công nghệ front-end, build project (Vue, Nuxt, Next, Webpack), tìm hiểu thư viện hoặc framework mới",
+      "ov3": "- Tôi muốn tìm hiểu công nghệ mới và làm việc trong dự án lớn"
+    }
+  }
+}
