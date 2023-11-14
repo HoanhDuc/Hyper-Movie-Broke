@@ -1,10 +1,10 @@
 import axios from "axios";
-import { NextRequest } from "next/server";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const movieId = searchParams.get("movieId");
   const episodeId = searchParams.get("episodeId");
+  const server = searchParams.get("server");
   try {
     const { data } = await axios.get(
       `${process.env.NEXT_PUBLIC_API_MOTPHIM}/play/get`,
@@ -12,6 +12,7 @@ export async function GET(req: Request) {
         params: {
           movieId,
           episodeId,
+          server: server || 0,
         },
       }
     );
