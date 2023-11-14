@@ -8,7 +8,7 @@ export class MovieModel {
   private _Banner: string;
   private _Link: string;
   private _Quanlity: string;
-  private _ViewNumber: number;
+  private _ViewNumber: string;
   private _TypeRaw: string;
   private _Year: number;
   private _StatusRaw: string;

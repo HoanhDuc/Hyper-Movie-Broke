@@ -6,7 +6,7 @@ export interface IMovie {
   OtherName: string;
   Avatar: string;
   Description: string;
-  ViewNumber: number;
+  ViewNumber: string;
   EpisodesTotal: number;
   Status: number;
   TypeId: number;
