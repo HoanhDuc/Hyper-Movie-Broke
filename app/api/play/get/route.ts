@@ -10,8 +10,8 @@ export async function GET(req: Request) {
       `${process.env.NEXT_PUBLIC_API_MOTPHIM}/play/get`,
       {
         params: {
-          movieId: 33658,
-          episodeId: 540956,
+          movieId,
+          episodeId,
         },
       }
     );

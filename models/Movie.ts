@@ -1,4 +1,5 @@
-import { IEpisodes, IMovie } from "./interfaces/MovieInterface";
+import { EpisodeModel } from "@/models/Episode";
+import { IEpisodes, IMovie } from "@/models/interfaces/MovieInterface";
 
 export class MovieModel {
   private _Id: number;
@@ -63,7 +64,7 @@ export class MovieModel {
     return this._Description;
   }
 
-  get episodes(): IEpisodes[] {
-    return this._Episodes;
+  get episodes(): EpisodeModel[] {
+    return this._Episodes.map((item) => new EpisodeModel(item));
   }
 }
