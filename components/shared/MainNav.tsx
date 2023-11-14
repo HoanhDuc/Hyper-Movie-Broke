@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 import ModeToggle from "@/components/shared/ModeToggle";
 import { motion } from "framer-motion";
-import LanguageSwitcher from "../switch-language/SwitcherLanguage";
+import Image from "next/image";
+import LanguageSwitcher from "@/components/switch-language/SwitcherLanguage";
 
 export default function MainNav() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -25,7 +26,7 @@ export default function MainNav() {
 
   return (
     <motion.header
-      className={`sticky top-0 z-50 transition-all duration-200 ${
+      className={`fixed w-full top-0 z-50 transition-all duration-200 ${
         isScrolled ? "bg-background/80 backdrop-blur-2xl border-b" : ""
       }`}
       initial={{ y: -100 }}
@@ -33,9 +34,16 @@ export default function MainNav() {
       transition={{ type: "spring", bounce: 0.25 }}
     >
       <nav
-        className="mx-auto flex max-w-7xl items-center justify-end p-2 lg:px-8"
+        className="mx-auto flex max-w-7xl items-center justify-between p-2 lg:px-8"
         aria-label="Global"
       >
+        <Image
+          src={"/logo.png"}
+          alt=""
+          width={100}
+          height={50}
+          className="rounded-md shadow-md shadow-cyan-500"
+        />
         <div className="flex space-x-1 z-50">
           <LanguageSwitcher />
           <ModeToggle />

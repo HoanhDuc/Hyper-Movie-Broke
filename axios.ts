@@ -19,19 +19,14 @@ class Axios {
       baseURL: baseApi,
       timeout: 30000,
       withCredentials: false,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        Accept: "application/json, text/plain, */*",
-        "Access-Control-Allow-Credentials": true,
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-      },
     });
-    // this.instance.defaults.headers.common = {
-    //   Accept: "application/json, text/plain, */*",
-    //   "Access-Control-Allow-Origin": "*",
-    //   "Access-Control-Allow-Credentials": true,
-    //   "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-    // };
+    this.instance.defaults.headers.common = {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": false,
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    };
     this.instance.defaults.headers.common["timezone"] =
       Intl.DateTimeFormat().resolvedOptions().timeZone;
     this.instance.interceptors.response.use(
