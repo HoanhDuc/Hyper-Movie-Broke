@@ -1,7 +1,7 @@
 import axios from "axios";
 import { NextRequest } from "next/server";
 
-export async function GET(req: NextRequest, { params }:any) {
+export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const movieId = searchParams.get("movieId");
   const episodeId = searchParams.get("episodeId");

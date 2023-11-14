@@ -1,10 +1,7 @@
 import axios from "axios";
 import { NextRequest } from "next/server";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { name: string } }
-) {
+export async function GET(req: Request, { params }: { params: { name: string } }) {
   try {
     const { data } = await axios.get(
       `${process.env.NEXT_PUBLIC_API_MOTPHIM}/movie/${params.name}`

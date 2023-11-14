@@ -7,7 +7,7 @@ type ResponseData = {
   message: string;
 };
 
-export async function GET(res: NextApiResponse<ResponseData>) {
+export async function GET(request: Request) {
   try {
     const { data } = await axios.get(
       `${process.env.NEXT_PUBLIC_API_MOTPHIM}/search`
@@ -15,6 +15,6 @@ export async function GET(res: NextApiResponse<ResponseData>) {
     return new Response(JSON.stringify(data));
   } catch (error: any) {
     console.error("Error fetching data:", error.message);
-    res.status(500).json({ message: "Internal Server Error" });
+    // res.status(500).json({ message: "Internal Server Error" });
   }
 }
