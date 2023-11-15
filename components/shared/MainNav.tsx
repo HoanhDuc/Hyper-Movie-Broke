@@ -42,7 +42,7 @@ export default function MainNav() {
           alt=""
           width={100}
           height={50}
-          className="rounded-md shadow-md shadow-cyan-500"
+          className="rounded-md hover:shadow-md hover:shadow-red-600"
         />
         <div className="flex space-x-1 z-50">
           <LanguageSwitcher />

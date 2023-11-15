@@ -1,5 +1,6 @@
 import { EpisodeModel } from "@/models/Episode";
-import { IEpisodes, IMovie } from "@/models/interfaces/MovieInterface";
+import { ICast, IEpisodes, IMovie } from "@/models/interfaces/MovieInterface";
+import { CastModel } from "@/models/Cast";
 
 export class MovieModel {
   private _Id: number;
@@ -21,6 +22,7 @@ export class MovieModel {
   private _Episodes: IEpisodes[];
   private _EpisodeTrailer: IEpisodes[];
   private _Trailer?: string;
+  private _Casts?: ICast[];
   constructor(movie: IMovie) {
     this._Id = movie.Id;
     this._Name = movie.Name;
@@ -41,6 +43,7 @@ export class MovieModel {
     this._Episodes = movie.Episodes;
     this._EpisodeTrailer = movie.EpisodeTrailer;
     this._Trailer = movie?.Trailer;
+    this._Casts = movie?.Casts;
   }
   get id(): number {
     return this._Id;
@@ -74,10 +77,27 @@ export class MovieModel {
     return this._StatusTitle;
   }
 
+  get viewNumber(): string {
+    return this._ViewNumber;
+  }
+
+  get year(): number {
+    return this._Year;
+  }
+
   get statusRaw(): string {
     return this._StatusRaw;
   }
+
+  get isTrailer(): boolean {
+    return this._StatusRaw === "trailer";
+  }
+
   get trailerYT(): string | undefined {
     return this._Trailer;
+  }
+
+  get casts(): CastModel[] | undefined {
+    return this._Casts?.map((item: ICast) => new CastModel(item));
   }
 }

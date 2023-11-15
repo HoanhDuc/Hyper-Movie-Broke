@@ -1,3 +1,4 @@
+import { CastModel } from "@/models/Cast";
 export interface IMovie {
   Banner: string;
   Quanlity: string;
@@ -88,4 +89,10 @@ export interface IEpisodes {
   FullLink: string;
   Type: number;
   CreateOn: string;
+}
+export interface IPagination {
+  PageIndex: number;
+  PageSize: number;
+  PageCount: number;
+  TotalRecords: number;
 }

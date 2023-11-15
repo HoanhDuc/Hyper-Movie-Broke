@@ -10,60 +10,95 @@ import { FADE_RIGHT_ANIMATION_VARIANTS } from "@/constants/animation";
 import { MovieModel } from "@/models/Movie";
 import { IMovie } from "@/models/interfaces/MovieInterface";
 import { motion } from "framer-motion";
-import { useEffect, useMemo, useState } from "react";
-import Pagination from "@/components/common/Pagination";
+import { useEffect, useState } from "react";
+import Pagination from "@/components/common/pagination";
+import Loader from "@/components/ui/loader";
+import Image from "next/image";
+import { PaginationModel } from "@/models/Pagination";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter()
   const [movies, setMovies] = useState<MovieModel[]>([]);
+  const [pagination, setPagination] = useState<PaginationModel>();
+  const [currentParams, setCurrentParams] = useState<any>();
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async (params?: any) => {
+    setLoading(true);
     try {
       const {
-        data: { Records },
+        data: { records, pagination },
       }: any = await axios.get("/api/search", { params });
-      setMovies(Records.map((item: IMovie) => new MovieModel(item)));
+      setMovies(records.map((item: IMovie) => new MovieModel(item)));
+      setPagination(new PaginationModel(pagination));
     } catch (error) {
       console.error("Error fetching data:", error);
     }
+    setLoading(false);
+  };
+
+  const onPageChange = (pageNumber: number) => {
+    setPage(pageNumber);
+    fetchData({ ...currentParams, pageNumber: pageNumber });
   };
 
   const onFilter = (params: any) => {
+    setPage(1);
+    setCurrentParams(params);
     fetchData(params);
   };
-
-  const randomItem = useMemo(() => {
-    const randomNumber = Math.floor(Math.random() * movies.length);
-    return movies[randomNumber];
-  }, [movies]);
 
   const MoviesList: React.FC = () => {
     return (
       <div className="container mx-auto flex flex-col gap-5">
-        <div>
-          <motion.h2
-            variants={FADE_RIGHT_ANIMATION_VARIANTS}
-            className="text-lg font-bold md:text-xl lg:text-2xl mb-5"
-          >
-            Most Popular Movies
-          </motion.h2>
-          <AnimationWaiting>
-            <div className="grid grid-cols-2 gap-3 md:gap-5 md:grid-cols-3 lg:grid-cols-5">
-              {movies.map((item) => (
-                <motion.div
-                  variants={FADE_RIGHT_ANIMATION_VARIANTS}
-                  key={item.id}
-                >
-                  <MovieCard movieInfo={item} />
-                </motion.div>
-              ))}
-            </div>
-          </AnimationWaiting>
-          <Pagination totalPages={10} />
-        </div>
+        <motion.h2 className="text-lg font-bold md:text-xl lg:text-2xl">
+          Most Popular Movies:
+        </motion.h2>
+        {loading ? (
+          <div className="mx-auto">
+            <Loader />
+          </div>
+        ) : (
+          <>
+            {movies.length ? (
+              <div>
+                <AnimationWaiting>
+                  <div className="grid grid-cols-2 gap-3 md:gap-5 md:grid-cols-3 lg:grid-cols-5">
+                    {movies.map((item) => (
+                      <motion.div
+                        variants={FADE_RIGHT_ANIMATION_VARIANTS}
+                        key={item.id}
+                      >
+                        <MovieCard movieInfo={item} />
+                      </motion.div>
+                    ))}
+                  </div>
+                </AnimationWaiting>
+                <Pagination
+                  currentPage={page}
+                  pageSize={pagination?.pageSize}
+                  totalPages={pagination?.pageCount}
+                  totalItem={pagination?.totalRecords}
+                  onChange={onPageChange}
+                />
+              </div>
+            ) : (
+              <Image
+                src="/empty-movie.png"
+                alt="play"
+                width={500}
+                height={200}
+                className="object-cover mx-auto"
+              />
+            )}
+          </>
+        )}
       </div>
     );
   };
@@ -71,7 +106,7 @@ export default function Home() {
   return (
     <FramerContainer>
       <div className="min-h-screen flex flex-col gap-10">
-        <HeroBanner movieProps={randomItem} />
+        <HeroBanner />
         <FilterMovie onFilter={onFilter} />
         <MoviesList />
         <FacebookChatBox />

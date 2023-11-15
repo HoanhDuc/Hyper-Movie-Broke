@@ -124,6 +124,11 @@ export default function FilterMovie({
         autoFocus
         value={keyword}
         placeholder="Give me keyword"
+        onKeyUp={(e) => {
+          if (e.code === "Enter") {
+            onSubmit();
+          }
+        }}
         onChange={handleChangeKeyword}
       />
     );
@@ -140,8 +145,8 @@ export default function FilterMovie({
     setTypeRaw("");
     setKeyword("");
     setOrderBy("");
-    setYear("")
-    onSubmit();
+    setYear("");
+    onFilter({});
   };
 
   const onSubmit = () => {

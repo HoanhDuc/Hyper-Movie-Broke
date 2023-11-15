@@ -76,7 +76,7 @@ const WatchMoviePage = () => {
           {movieInfo?.episodes.map((item: EpisodeModel) => (
             <Button
               key={item.id}
-              variant={item.id === selectedEpisodeId ? "secondary" : "default"}
+              variant={item.id === selectedEpisodeId ? "destructive" : "default"}
               onClick={() => handleChangeEpisode(item.id)}
             >
               {item.name}
@@ -95,7 +95,7 @@ const WatchMoviePage = () => {
           {servers?.map((item: LinkModel, index: number) => (
             <Button
               key={item.link}
-              variant={index === server ? "secondary" : "default"}
+              variant={index === server ? "destructive" : "default"}
               onClick={() => handleChangeServer(item, index)}
             >
               {item.serverName}
@@ -107,17 +107,19 @@ const WatchMoviePage = () => {
   };
 
   return (
-    <div className="container mx-auto flex flex-col gap-3 py-14">
+    <div className="flex flex-col gap-3 py-14">
       <ReactHlsPlayer
         playerRef={vdRef}
         src={serverSelected?.link || ""}
         autoPlay
         controls={true}
         width="100%"
-        className="max-h-[80vh] cursor-pointer rounded-md overflow-hidden mx-auto border border-white"
+        className="max-h-[80vh] cursor-pointer overflow-hidden"
       />
+      <div className="container mx-auto ">
         <Servers />
         <Episodes />
+      </div>
     </div>
   );
 };

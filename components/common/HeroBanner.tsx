@@ -1,58 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import { MovieModel } from "@/models/Movie";
-import { motion } from "framer-motion";
-import { FADE_RIGHT_ANIMATION_VARIANTS } from "@/constants/animation";
-import PlayButton from "@/components/common/PlayButton";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
-function Banner({ movieProps }: { movieProps: MovieModel }) {
-  // const [movie, setMovie] = useState<MovieModel>();
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const {
-  //         data: { movie },
-  //       }: any = await axios.get(`/api/movie/${movieProps.link}`);
-  //       const movieModel = new MovieModel(movie);
-  //       setMovie(movieModel);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-  //   if (movieProps) {
-  //     fetchData();
-  //   }
-  // }, [movieProps]);
-
+function Banner() {
   return (
     <div className="relative w-full">
       <img
-        src="https://www.techspot.com/images2/news/bigimage/2022/02/2022-02-15-image-28.jpg"
+        src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/8e123eed-7564-4950-a68c-b4e748016358/dcgftcl-8c2f188b-f981-4cf8-907a-da3ae34ecef9.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzhlMTIzZWVkLTc1NjQtNDk1MC1hNjhjLWI0ZTc0ODAxNjM1OFwvZGNnZnRjbC04YzJmMTg4Yi1mOTgxLTRjZjgtOTA3YS1kYTNhZTM0ZWNlZjkuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.o1KF6QdtcAhHANklCbwNu5Kd-vtQq7Tqbhav-Ji_JZE"
         alt=""
         width="100%"
-        className="object-cover max-h-[80vh]"
+        className="object-cover max-h-[50vh]"
       />
-      {/* <div className="absolute top-[30%]  lg:max-w-2xl left-10 hidden md:block">
-        <motion.h2
-          variants={FADE_RIGHT_ANIMATION_VARIANTS}
-          className="text-2xl font-bold md:text-3xl lg:text-5xl mb-5"
-        >
-          {movie?.name}
-        </motion.h2>
-        <p className="max-w-xs text-xs text-shadow-md md:max-w-lg md:text-lg lg:max-w-2xl lg:text-xl mb-5">
-          {movie?.description}
-        </p>
-        <div className="flex space-x-3">
-          <PlayButton movieId={movie?.id} />
-          <button className="bannerButton bg-[gray]/70 px-5 py-3 rounded-lg">
-            More Info
-          </button>
-        </div>
-      </div> */}
     </div>
   );
 }
 
 export default Banner;
+//https://asicsulb.org/corporate/images/connect/beachfront/2019-01/movies-on-the-house.jpg
