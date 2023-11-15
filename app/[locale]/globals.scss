@@ -74,7 +74,9 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
   }
 }
 
@@ -88,7 +90,7 @@
     display: flex;
     flex-wrap: nowrap;
   }
-  
+
   .parallax .scroller {
     font-weight: 600;
     text-transform: uppercase;
@@ -98,12 +100,12 @@
     display: flex;
     flex-wrap: nowrap;
   }
-  
+
   .parallax span {
     display: block;
     margin-right: 30px;
   }
-  
+
   .step {
     counter-increment: step;
   }
@@ -127,13 +129,73 @@
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(255, 0, 0); 
+  background: red;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #b30000; 
+  background: #b30000;
+}
+.ant-select-selector{
+  background-color: #000;
+}
+//loader
+.loader-container {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+.loader {
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 4px solid #fff;
+  border-right: 4px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader::after {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border-left: 4px solid red;
+  border-bottom: 4px solid transparent;
+  animation: rotation 0.5s linear infinite reverse;
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+//pagination
+.pagination {
+  display: flex;
+  list-style: none;
 }
 
+.pagination li {
+  margin-right: 0.5rem;
+}
 
+.pagination a {
+  text-decoration: none;
+  color: white;
+  border-radius: 0.25rem;
+}
 
+.pagination a:hover,
+.pagination .active a {
+  background-color: #f56565; /* Red color */
+}

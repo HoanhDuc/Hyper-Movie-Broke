@@ -1,17 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import { MovieModel } from "@/models/Movie";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import axios from "axios";
 import YouTube from "react-youtube";
+import Loader from "@/components/ui/loader";
 
 const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
-  const router = useRouter();
   const [visiblePreviewInfo, setVisiblePreviewInfo] = useState(false);
   const [movieDetail, setMovieDetail] = useState<MovieModel>();
-  const [loading, setLoading] = useState<MovieModel>();
 
   const fetchMovieDetail = async () => {
     try {
@@ -56,16 +53,23 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
         </div>
       </div>
       <Dialog open={visiblePreviewInfo} onOpenChange={setVisiblePreviewInfo}>
-        <DialogContent className="overflow-y-auto">
-          <YouTube
-            videoId={extractVideoId(movieDetail?.trailerYT)}
-            className="w-full mx-auto"
-            opts={{ height: "400", width: "100%" }}
-          />
-          <p className="font-bold md:text-xl lg:text-2xl">
-            {movieDetail?.name}
-          </p>
-          <p>{movieDetail?.description}</p>
+        <DialogContent>
+          {movieDetail ? (
+            <div className="flex flex-col gap-3 overflow-y-auto">
+              <YouTube
+                videoId={extractVideoId(movieDetail?.trailerYT)}
+                className="w-full mx-auto"
+                opts={{ height: "400", width: "100%" }}
+              />
+              <p className="font-bold md:text-xl lg:text-2xl">
+                {movieDetail?.name}
+              </p>
+              <p>{movieDetail?.description}</p>
+              <p>{movieDetail?.description}</p>
+            </div>
+          ) : (
+            <Loader />
+          )}
         </DialogContent>
       </Dialog>
     </section>
