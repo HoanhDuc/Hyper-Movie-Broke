@@ -20,6 +20,7 @@ export class MovieModel {
   private _Description: string;
   private _Episodes: IEpisodes[];
   private _EpisodeTrailer: IEpisodes[];
+  private _Trailer?: string;
   constructor(movie: IMovie) {
     this._Id = movie.Id;
     this._Name = movie.Name;
@@ -39,6 +40,7 @@ export class MovieModel {
     this._Description = movie.Description;
     this._Episodes = movie.Episodes;
     this._EpisodeTrailer = movie.EpisodeTrailer;
+    this._Trailer = movie?.Trailer;
   }
   get id(): number {
     return this._Id;
@@ -66,5 +68,16 @@ export class MovieModel {
 
   get episodes(): EpisodeModel[] {
     return this._Episodes.map((item) => new EpisodeModel(item));
+  }
+
+  get statusTitle(): string {
+    return this._StatusTitle;
+  }
+
+  get statusRaw(): string {
+    return this._StatusRaw;
+  }
+  get trailerYT(): string | undefined {
+    return this._Trailer;
   }
 }
