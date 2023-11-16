@@ -16,6 +16,10 @@ const description = "NextMovie - Free and Fast Update Movies";
 export const metadata: Metadata = {
   title,
   description,
+  verification: {
+    google:
+      "google-site-verification=Y5OPaw_tefRfLqkRVuLeOFUahubeU2A7VcL2IpAAFfs",
+  },
   openGraph: {
     title,
     description,
