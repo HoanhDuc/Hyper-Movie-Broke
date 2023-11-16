@@ -37,13 +37,14 @@ export default function MainNav() {
         className="mx-auto flex max-w-7xl items-center justify-between p-2 lg:px-8"
         aria-label="Global"
       >
-        <Image
+        <div />
+        {/* <Image
           src={"/logo.png"}
           alt=""
           width={100}
           height={50}
           className="rounded-md hover:shadow-md hover:shadow-red-600"
-        />
+        /> */}
         <div className="flex space-x-1 z-50">
           <LanguageSwitcher />
           <ModeToggle />

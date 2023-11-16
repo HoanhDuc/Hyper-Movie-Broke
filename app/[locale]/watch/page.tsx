@@ -1,16 +1,16 @@
 "use client";
+import "@/components/styles/frame.scss";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import ReactHlsPlayer from "react-hls-player";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { MovieModel } from "@/models/Movie";
 import { Button } from "@/components/ui/button";
-import { IEpisodes } from "@/models/interfaces/MovieInterface";
 import { LinkModel } from "@/models/Link";
 import { EpisodeModel } from "@/models/Episode";
 
 const WatchMoviePage = () => {
-  const router = useRouter()
+  const router = useRouter();
   const pathname = usePathname();
   const vdRef = useRef<any | null>(null);
   const searchParams = useSearchParams();
@@ -35,7 +35,7 @@ const WatchMoviePage = () => {
         console.error("Error fetching data:", error);
       }
     };
-    if (id && name) fetchData();
+    if (id && name && !movieInfo) fetchData();
   }, [id, name]);
 
   useEffect(() => {
@@ -54,29 +54,34 @@ const WatchMoviePage = () => {
       }
     };
     if (movieInfo) fetchData();
-  }, [movieInfo, serverSelected, selectedEpisodeId]);
+  }, [movieInfo]);
 
-  const handleChangeEpisode = (id: number) => {
-    setSelectedEpisodeId(id);
-    router.push(`${pathname}?id=${id}&name=${name}&episodeId=${id}&server=${server}`);
+  const handleChangeEpisode = (idE: number) => {
+    setSelectedEpisodeId(idE);
+    router.replace(
+      `${pathname}?id=${id}&name=${name}&episodeId=${idE}&server=${server}`,
+      {}
+    );
   };
 
-    const handleChangeServer = (item: LinkModel, index:number) => {
-      setServerSelected(item);
-      router.push(
-        `${pathname}?id=${id}&name=${name}&episodeId=${id}&server=${index}`
-      );
-    };
+  const handleChangeServer = (item: LinkModel, index: number) => {
+    setServerSelected(item);
+    router.replace(
+      `${pathname}?id=${id}&name=${name}&episodeId=${id}&server=${index}`
+    );
+  };
 
   const Episodes = () => {
     return (
-      <section hidden={!Boolean(movieInfo?.episodes.length)}>
+      <section hidden={!movieInfo?.episodes?.length || movieInfo?.episodes?.length <= 1}>
         <p className="font-bold md:text-lg lg:text-xl mb-2">Episodes:</p>
         <div className="flex flex-wrap gap-3">
           {movieInfo?.episodes.map((item: EpisodeModel) => (
             <Button
               key={item.id}
-              variant={item.id === selectedEpisodeId ? "destructive" : "default"}
+              variant={
+                item.id === selectedEpisodeId ? "destructive" : "default"
+              }
               onClick={() => handleChangeEpisode(item.id)}
             >
               {item.name}
@@ -89,7 +94,7 @@ const WatchMoviePage = () => {
 
   const Servers = () => {
     return (
-      <section hidden={!Boolean(servers?.length)}>
+      <section hidden={!servers?.length || servers?.length <= 1}>
         <p className="font-bold md:text-lg lg:text-xl mb-2">Server:</p>
         <div className="flex flex-wrap gap-3">
           {servers?.map((item: LinkModel, index: number) => (
@@ -111,10 +116,15 @@ const WatchMoviePage = () => {
       <ReactHlsPlayer
         playerRef={vdRef}
         src={serverSelected?.link || ""}
-        autoPlay
+        autoPlay={Boolean(serverSelected?.link)}
         controls={true}
         width="100%"
         className="max-h-[80vh] cursor-pointer overflow-hidden"
+        hlsConfig={{
+          maxLoadingDelay: 4,
+          minAutoBitrate: 0,
+          lowLatencyMode: true,
+        }}
       />
       <div className="container mx-auto ">
         <Servers />

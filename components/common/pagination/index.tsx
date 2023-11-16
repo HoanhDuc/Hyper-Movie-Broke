@@ -14,7 +14,7 @@ const PaginationCpn: React.FC<PaginationProps> = ({
   currentPage = 1,
   totalPages,
   totalItem,
-  pageSize,
+  pageSize = 24,
   onChange,
 }) => {
 

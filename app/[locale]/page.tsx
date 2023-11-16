@@ -69,7 +69,7 @@ export default function Home() {
             {movies.length ? (
               <div>
                 <AnimationWaiting>
-                  <div className="grid grid-cols-2 gap-3 md:gap-5 md:grid-cols-3 lg:grid-cols-5">
+                  <div className="grid grid-cols-2 gap-3 md:gap-5 md:grid-cols-3 lg:grid-cols-6">
                     {movies.map((item) => (
                       <motion.div
                         variants={FADE_RIGHT_ANIMATION_VARIANTS}
@@ -82,7 +82,7 @@ export default function Home() {
                 </AnimationWaiting>
                 <Pagination
                   currentPage={page}
-                  pageSize={pagination?.pageSize}
+                  // pageSize={pagination?.pageSize}
                   totalPages={pagination?.pageCount}
                   totalItem={pagination?.totalRecords}
                   onChange={onPageChange}

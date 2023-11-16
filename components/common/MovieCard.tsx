@@ -10,7 +10,11 @@ import AnimationWaiting from "@/components/shared/AnimationWaitingContainer";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { FADE_RIGHT_ANIMATION_VARIANTS } from "@/constants/animation";
+import {
+  FADE_RIGHT_ANIMATION_VARIANTS,
+  FADE_UP_ANIMATION_VARIANTS,
+} from "@/constants/animation";
+import { extractVideoId } from "@/components/helpers/youtube";
 
 const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
   const router = useRouter();
@@ -36,16 +40,11 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
     }
   };
 
-  const extractVideoId = (youtubeUrl: string | undefined) => {
-    if (!youtubeUrl) return "null";
-    const pattern =
-      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-    const match = youtubeUrl.match(pattern);
-    if (match) return match[1] as string;
-  };
+
 
   const openDetail = async () => {
     setVisiblePreviewInfo(true);
+    if (movieDetail) return;
     await fetchMovieDetail();
   };
 
@@ -73,28 +72,25 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
     );
   };
 
-    const TrendingList: React.FC = () => {
-      return (
-        <AnimationWaiting>
-          <motion.h2
-            variants={FADE_RIGHT_ANIMATION_VARIANTS}
-            className="text-lg font-bold md:text-xl lg:text-2xl mb-5"
-          >
-            Trending Movies:
-          </motion.h2>
-          <div className="grid grid-cols-2 gap-3 md:gap-5 md:grid-cols-3 lg:grid-cols-4">
-            {trendingMovie?.map((item) => (
-              <motion.div
-                variants={FADE_RIGHT_ANIMATION_VARIANTS}
-                key={item.id}
-              >
-                <MovieCard movieInfo={item} />
-              </motion.div>
-            ))}
-          </div>
-        </AnimationWaiting>
-      );
-    };
+  const TrendingList: React.FC = () => {
+    return (
+      <AnimationWaiting>
+        <motion.h2
+          variants={FADE_RIGHT_ANIMATION_VARIANTS}
+          className="text-lg font-bold md:text-xl lg:text-2xl mb-5"
+        >
+          Trending Movies:
+        </motion.h2>
+        <div className="grid grid-cols-2 gap-3 md:gap-5 md:grid-cols-3 lg:grid-cols-4">
+          {trendingMovie?.map((item) => (
+            <motion.div variants={FADE_RIGHT_ANIMATION_VARIANTS} key={item.id}>
+              <MovieCard movieInfo={item} />
+            </motion.div>
+          ))}
+        </div>
+      </AnimationWaiting>
+    );
+  };
 
   return (
     <section>
@@ -123,11 +119,14 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
               )}
 
               <div className="flex justify-between items-center">
-                <div>
+                <motion.div variants={FADE_UP_ANIMATION_VARIANTS}>
                   <p className="font-bold md:text-xl lg:text-2xl mb-3">
                     {movieDetail?.name}
                   </p>
-                  <div className="flex gap-5">
+                  <motion.div
+                    variants={FADE_UP_ANIMATION_VARIANTS}
+                    className="flex gap-5"
+                  >
                     <p>
                       Watched:{" "}
                       <span className="text-green-500">
@@ -136,8 +135,8 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
                     </p>
                     <p>{movieDetail.year}</p>
                     <p>{movieDetail.statusTitle}</p>
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
                 <Image
                   hidden={movieDetail.isTrailer}
                   src="/play-btn.png"
@@ -148,8 +147,13 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
                   onClick={goToWatch}
                 />
               </div>
-              <p>Đây {movieDetail?.description}</p>
-              <div className="grid lg:grid-cols-3 gap-3 lg:gap-5">
+              <motion.p variants={FADE_UP_ANIMATION_VARIANTS}>
+                Đây {movieDetail?.description}
+              </motion.p>
+              <motion.div
+                variants={FADE_RIGHT_ANIMATION_VARIANTS}
+                className="grid lg:grid-cols-3 gap-3 lg:gap-5"
+              >
                 {movieDetail?.casts?.map((cast: CastModel, idx: number) => (
                   <div key={idx} className="flex gap-2">
                     <img
@@ -163,7 +167,7 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
                     </div>
                   </div>
                 ))}
-              </div>
+              </motion.div>
               <div className="m-3 flex flex-col gap-5">
                 <ComingSoonList />
                 <TrendingList />
