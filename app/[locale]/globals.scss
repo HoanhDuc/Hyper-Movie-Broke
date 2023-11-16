@@ -129,7 +129,7 @@
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: red;
+  background: #DC2626;
 }
 
 /* Handle on hover */
@@ -167,7 +167,7 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border-left: 4px solid red;
+  border-left: 4px solid #DC2626;
   border-bottom: 4px solid transparent;
   animation: rotation 0.5s linear infinite reverse;
 }
@@ -178,24 +178,4 @@
   100% {
     transform: rotate(360deg);
   }
-}
-//pagination
-.pagination {
-  display: flex;
-  list-style: none;
-}
-
-.pagination li {
-  margin-right: 0.5rem;
-}
-
-.pagination a {
-  text-decoration: none;
-  color: white;
-  border-radius: 0.25rem;
-}
-
-.pagination a:hover,
-.pagination .active a {
-  background-color: #f56565; /* Red color */
 }
