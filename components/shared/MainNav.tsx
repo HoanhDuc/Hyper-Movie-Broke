@@ -38,13 +38,13 @@ export default function MainNav() {
         aria-label="Global"
       >
         <div />
-        {/* <Image
+        <Image
           src={"/logo.png"}
           alt=""
-          width={100}
+          width={130}
           height={50}
           className="rounded-md hover:shadow-md hover:shadow-red-600"
-        /> */}
+        />
         <div className="flex space-x-1 z-50">
           <LanguageSwitcher />
           <ModeToggle />
