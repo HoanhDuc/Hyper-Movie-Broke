@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /          # Cho phép tất cả các trang
+Sitemap: https://ducnh.io.vn/sitemap.xml

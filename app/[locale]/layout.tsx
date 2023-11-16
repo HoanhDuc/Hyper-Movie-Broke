@@ -10,8 +10,8 @@ import Footer from "@/components/shared/footer";
 import { NextIntlClientProvider } from "next-intl";
 const inter = Inter({ subsets: ["latin"] });
 
-const title = "NoteFolio";
-const description = "Just Huyền can watch movie here!";
+const title = "NextMovie";
+const description = "NextMovie - Free and Fast Update Movies";
 
 export const metadata: Metadata = {
   title,
