@@ -179,3 +179,16 @@
     transform: rotate(360deg);
   }
 }
+.spinner{
+position:absolute;
+top:48%;
+left:48%;
+display:none;
+border:8px solid rgba(0,0,0,.1);
+border-left-color:red;
+height:60px;
+width:60px;
+border-radius:50%;
+animation: spin 1s linear infinite;
+z-index:999;
+}

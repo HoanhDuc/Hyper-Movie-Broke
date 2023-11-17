@@ -15,6 +15,7 @@ import {
   FADE_UP_ANIMATION_VARIANTS,
 } from "@/constants/animation";
 import { extractVideoId } from "@/components/helpers/youtube";
+import { defaultImg, errorImage } from "@/components/helpers/image";
 
 const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
   const router = useRouter();
@@ -157,8 +158,9 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
                 {movieDetail?.casts?.map((cast: CastModel, idx: number) => (
                   <div key={idx} className="flex gap-2">
                     <img
-                      src={cast.avatar}
+                      src={cast.avatar || defaultImg}
                       alt=""
+                      onError={errorImage}
                       className="rounded-md w-12 h-12 lg:w-16 lg:h-16 object-cover"
                     />
                     <div className="text-sm">

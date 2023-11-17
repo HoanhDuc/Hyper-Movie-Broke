@@ -4,6 +4,7 @@ import ModeToggle from "@/components/shared/ModeToggle";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import LanguageSwitcher from "@/components/switch-language/SwitcherLanguage";
+import Link from "next/link";
 
 export default function MainNav() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,13 +38,15 @@ export default function MainNav() {
         className="mx-auto flex max-w-7xl items-center justify-between p-2 lg:px-8"
         aria-label="Global"
       >
-        <Image
-          src={"/logo.png"}
-          alt=""
-          width={150}
-          height={50}
-          className="rounded-md hover:shadow-md hover:shadow-red-600"
-        />
+        <Link href={"/"}>
+          <Image
+            src={"/logo.png"}
+            alt=""
+            width={150}
+            height={50}
+            className="rounded-md hover:shadow-md hover:shadow-red-600"
+          />
+        </Link>
         <div className="flex space-x-1 z-50">
           <LanguageSwitcher />
           <ModeToggle />
