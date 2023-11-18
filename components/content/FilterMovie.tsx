@@ -33,7 +33,10 @@ export default function FilterMovie({
       <motion.div>
         <p className="mb-2 text-sm font-bold">Order by:</p>
         <Select value={orderBy} onValueChange={setOrderBy}>
-          <SelectTrigger>{orderBy || "All"}</SelectTrigger>
+          <SelectTrigger>
+            {orderByOptions.find((item: any) => item.value === orderBy)
+              ?.label || "All"}
+          </SelectTrigger>
           <SelectContent>
             {orderByOptions.map((item) => (
               <SelectItem key={item.value} value={item.value}>
@@ -51,7 +54,10 @@ export default function FilterMovie({
       <motion.div>
         <p className="mb-2 text-sm font-bold">Film Genres:</p>
         <Select value={filmGenres} onValueChange={setFilmGenres}>
-          <SelectTrigger>{filmGenres || "All"}</SelectTrigger>
+          <SelectTrigger>
+            {filmGenresOptions.find((item: any) => item.value === filmGenres)
+              ?.label || "All"}
+          </SelectTrigger>
           <SelectContent>
             {filmGenresOptions.map((item) => (
               <SelectItem key={item.value} value={item.value}>
@@ -69,7 +75,10 @@ export default function FilterMovie({
       <motion.div>
         <p className="mb-2 text-sm font-bold">Countries:</p>
         <Select value={countries} onValueChange={setCountries}>
-          <SelectTrigger>{countries || "All"}</SelectTrigger>
+          <SelectTrigger>
+            {countriesOptions.find((item: any) => item.value === countries)
+              ?.label || "All"}
+          </SelectTrigger>
           <SelectContent>
             {countriesOptions.map((item) => (
               <SelectItem key={item.value} value={item.value}>
@@ -87,7 +96,10 @@ export default function FilterMovie({
       <motion.div>
         <p className="mb-2 text-sm font-bold">Year:</p>
         <Select value={year} onValueChange={setYear}>
-          <SelectTrigger>{year || "All"}</SelectTrigger>
+          <SelectTrigger>
+            {orderByOptions.find((item: any) => item.value === year)?.label ||
+              "All"}
+          </SelectTrigger>
           <SelectContent>
             {orderByOptions.map((item) => (
               <SelectItem key={item.value} value={item.value}>
@@ -105,7 +117,10 @@ export default function FilterMovie({
       <motion.div>
         <p className="mb-2 text-sm font-bold">Type Raw:</p>
         <Select value={typeRaw} onValueChange={setTypeRaw}>
-          <SelectTrigger>{typeRaw || "All"}</SelectTrigger>
+          <SelectTrigger>
+            {typeRawOptions.find((item: any) => item.value === typeRaw)
+              ?.label || "All"}
+          </SelectTrigger>
           <SelectContent>
             {typeRawOptions.map((item) => (
               <SelectItem key={item.value} value={item.value}>
@@ -121,8 +136,9 @@ export default function FilterMovie({
   const Keyword: React.FC = () => {
     return (
       <Input
-        autoFocus
+       autoFocus
         value={keyword}
+        key={Math.random() * 36.4621596072}
         placeholder="Give me keyword"
         onKeyUp={(e) => {
           if (e.code === "Enter") {

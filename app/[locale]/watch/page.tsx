@@ -95,7 +95,7 @@ const WatchMoviePage = () => {
     );
   };
 
-  const Episodes = () => {
+  const Episodes:React.FC = () => {
     return (
       <section
         hidden={
@@ -103,7 +103,7 @@ const WatchMoviePage = () => {
         }
       >
         <p className="font-bold md:text-lg lg:text-xl mb-2">Episodes:</p>
-        <div className="flex flex-wrap gap-3">
+        <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-3">
           {movieInfo?.episodes.map((item: EpisodeModel, index: number) => (
             <Button
               key={item.id}
@@ -126,11 +126,11 @@ const WatchMoviePage = () => {
     );
   };
 
-  const Servers = () => {
+  const Servers:React.FC = () => {
     return (
       <section hidden={!servers?.length || servers?.length <= 1}>
         <p className="font-bold md:text-lg lg:text-xl mb-2">Server:</p>
-        <div className="flex flex-wrap gap-3">
+        <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-3">
           {servers?.map((item: LinkModel, index: number) => (
             <Button
               key={item.link}
@@ -219,7 +219,7 @@ const WatchMoviePage = () => {
                 onError={errorImage}
                 className="rounded-md w-12 h-12 lg:w-16 lg:h-16 object-cover"
               />
-              <div className="text-md">
+              <div className="text-sm md:text-base">
                 <p className="mb-1">Name: {cast.name}</p>
                 <p>Age: Unknown</p>
               </div>
@@ -231,7 +231,7 @@ const WatchMoviePage = () => {
   };
 
   return (
-    <div className="py-14 container mx-auto">
+    <div className="py-14 lg:py-20 container mx-auto">
       {loading ? (
         <div className="w-full flex justify-center items-center h-[80vh]">
           <Loader />
