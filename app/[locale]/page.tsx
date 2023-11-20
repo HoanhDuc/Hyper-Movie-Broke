@@ -57,9 +57,9 @@ export default function Home() {
   const MoviesList: React.FC = () => {
     return (
       <div className="container mx-auto flex flex-col gap-5">
-        <motion.h2 className="text-lg font-bold md:text-xl lg:text-2xl">
-          Most Popular Movies:
-        </motion.h2>
+        <motion.h1 className="text-lg font-bold md:text-xl lg:text-2xl">
+          Hyper API Movies:
+        </motion.h1>
         {loading ? (
           <div className="mx-auto">
             <Loader />
