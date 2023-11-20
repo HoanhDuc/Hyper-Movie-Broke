@@ -10,8 +10,8 @@ import Footer from "@/components/shared/footer";
 import { NextIntlClientProvider } from "next-intl";
 const inter = Inter({ subsets: ["latin"] });
 
-const title = "NextMovie";
-const description = "NextMovie - Free and Fast Update Movies";
+const title = "Hyper API Movie";
+const description = "Hyper API Movie - Free and Fast Update Movies";
 
 export const metadata: Metadata = {
   title,
@@ -28,6 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
+    images: [{ url: "/opengraph-image.png" }],
   },
   // metadataBase: new URL("https://ducnhse.vercel.app"),
   themeColor: "#000",
