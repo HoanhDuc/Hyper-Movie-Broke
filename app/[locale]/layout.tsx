@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     description,
     images: [{ url: "/opengraph-image.png" }],
   },
-  // metadataBase: new URL("https://ducnhse.vercel.app"),
+  metadataBase: new URL("https://ducnh.io.vn"),
   themeColor: "#000",
 };
 export default async function RootLayout({
