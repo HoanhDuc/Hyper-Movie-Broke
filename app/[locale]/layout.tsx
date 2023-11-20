@@ -28,19 +28,6 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    images: [
-      {
-        url: "/opengraph-image.png",
-        width: 800,
-        height: 600,
-      },
-      {
-        url: "https://design102.blog.gov.uk/wp-content/uploads/sites/163/2022/01/D102-Blog-post_Alt-text_main-image.png",
-        width: 1800,
-        height: 1600,
-        alt: "NextMovie alt",
-      },
-    ],
   },
   // metadataBase: new URL("https://ducnhse.vercel.app"),
   themeColor: "#000",
