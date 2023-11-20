@@ -136,8 +136,7 @@ export default function FilterMovie({
   const Keyword: React.FC = () => {
     return (
       <Input
-       autoFocus
-        value={keyword}
+        defaultValue={keyword}
         key={Math.random() * 36.4621596072}
         placeholder="Give me keyword"
         onKeyUp={(e) => {
@@ -145,7 +144,7 @@ export default function FilterMovie({
             onSubmit();
           }
         }}
-        onChange={handleChangeKeyword}
+        onBlur={handleChangeKeyword}
       />
     );
   };
