@@ -95,16 +95,16 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
   };
 
   return (
-    <Tilt glareEnable glareBorderRadius={'8px'}>
+    <Tilt glareEnable glareBorderRadius={"8px"}>
       <div className="cursor-pointer" onClick={openDetail}>
-          <img
-            src={movieInfo?.poster}
-            alt={movieInfo?.name}
-            className="w-full h-[200px] md:h-[300px] object-cover rounded-md"
-          />
-          <div className="absolute left-0 top-3 p-2 bg-red-500 rounded-r-md text-xs md:text-sm">
-            <p>{movieInfo.statusTitle}</p>
-          </div>
+        <img
+          src={movieInfo?.poster}
+          alt={movieInfo?.name}
+          className="w-full h-[200px] md:h-[300px] object-cover rounded-md"
+        />
+        <div className="absolute left-0 top-3 p-2 bg-red-500 rounded-r-md text-xs md:text-sm">
+          <p>{movieInfo.statusTitle}</p>
+        </div>
       </div>
       <Dialog open={visiblePreviewInfo} onOpenChange={setVisiblePreviewInfo}>
         <DialogContent>
@@ -137,15 +137,23 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
                     <p>{movieDetail.statusTitle}</p>
                   </motion.div>
                 </motion.div>
-                <Image
-                  hidden={movieDetail.isTrailer}
-                  src="/play-btn.png"
-                  alt="play"
-                  width={70}
-                  height={0}
-                  className="object-cover rounded-full hover:scale-110 transition-all mr-1 cursor-pointer"
-                  onClick={goToWatch}
-                />
+                <motion.div
+                  whileHover={{ scale: 1.2, rotate: 360 }}
+                  whileTap={{
+                    scale: 1,
+                    rotate: -360,
+                  }}
+                >
+                  <Image
+                    hidden={movieDetail.isTrailer}
+                    src="/play-btn.png"
+                    alt="play"
+                    width={70}
+                    height={0}
+                    className="object-cover rounded-full hover:scale-110 transition-all mr-1 cursor-pointer"
+                    onClick={goToWatch}
+                  />
+                </motion.div>
               </div>
               <motion.p variants={FADE_UP_ANIMATION_VARIANTS}>
                 Đây {movieDetail?.description}
@@ -164,7 +172,7 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
                     />
                     <div className="text-sm">
                       <p className="mb-1">Name: {cast.name}</p>
-                      <p>Age: Unknown</p>
+                      <p>Age: 0</p>
                     </div>
                   </div>
                 ))}
