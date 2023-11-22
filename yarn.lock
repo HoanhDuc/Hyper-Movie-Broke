@@ -3078,6 +3078,11 @@ react-messenger-customer-chat@^0.8.0:
   dependencies:
     prop-types "^15.6.0"
 
+react-parallax-tilt@^1.7.175:
+  version "1.7.175"
+  resolved "https://registry.yarnpkg.com/react-parallax-tilt/-/react-parallax-tilt-1.7.175.tgz#738231d7677ca5d87422836f2d32cd9c299310fc"
+  integrity sha512-EwXLhOsEJmqP9/w7dl0B8qUQzI+d5SAeO5ZlECvGKrycMq2W19icjsEXHSDdTKsD/0n109dkSR/USOEsH6SJPA==
+
 react-remove-scroll-bar@^2.3.3:
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/react-remove-scroll-bar/-/react-remove-scroll-bar-2.3.4.tgz#53e272d7a5cb8242990c7f144c44d8bd8ab5afd9"

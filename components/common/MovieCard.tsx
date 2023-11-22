@@ -16,6 +16,7 @@ import {
 } from "@/constants/animation";
 import { extractVideoId } from "@/components/helpers/youtube";
 import { defaultImg, errorImage } from "@/components/helpers/image";
+import Tilt from "react-parallax-tilt";
 
 const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
   const router = useRouter();
@@ -94,9 +95,8 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
   };
 
   return (
-    <section>
+    <Tilt glareEnable glareBorderRadius={'8px'}>
       <div className="cursor-pointer" onClick={openDetail}>
-        <div className="relative hover:scale-105 transition-all">
           <img
             src={movieInfo?.poster}
             alt={movieInfo?.name}
@@ -105,7 +105,6 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
           <div className="absolute left-0 top-3 p-2 bg-red-500 rounded-r-md text-xs md:text-sm">
             <p>{movieInfo.statusTitle}</p>
           </div>
-        </div>
       </div>
       <Dialog open={visiblePreviewInfo} onOpenChange={setVisiblePreviewInfo}>
         <DialogContent>
@@ -180,7 +179,7 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
           )}
         </DialogContent>
       </Dialog>
-    </section>
+    </Tilt>
   );
 };
 
