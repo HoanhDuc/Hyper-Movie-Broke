@@ -17,6 +17,7 @@ import {
 import { extractVideoId } from "@/components/helpers/youtube";
 import { defaultImg, errorImage } from "@/components/helpers/image";
 import Tilt from "react-parallax-tilt";
+import PlayButton from "./PlayButton";
 
 const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
   const router = useRouter();
@@ -95,12 +96,13 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
   };
 
   return (
-    <Tilt glareEnable glareBorderRadius={"8px"}>
+    // <Tilt glareEnable glareBorderRadius={"8px"}>
+    <div className="relative overflow-hidden rounded-md">
       <div className="cursor-pointer" onClick={openDetail}>
         <img
           src={movieInfo?.poster}
           alt={movieInfo?.name}
-          className="w-full h-[200px] md:h-[300px] object-cover rounded-md"
+          className="w-full h-[200px] md:h-[300px] object-cover hover:scale-105 transition-all ease-out"
         />
         <div className="absolute left-0 top-3 p-2 bg-red-500 rounded-r-md text-xs md:text-sm">
           <p>{movieInfo.statusTitle}</p>
@@ -118,7 +120,7 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
                 />
               )}
 
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-end">
                 <motion.div variants={FADE_UP_ANIMATION_VARIANTS}>
                   <p className="font-bold md:text-xl lg:text-2xl mb-3">
                     {movieDetail?.name}
@@ -134,26 +136,15 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
                       </span>
                     </p>
                     <p>{movieDetail.year}</p>
-                    <p>{movieDetail.statusTitle}</p>
+                    <p className="border rounded-md p-2">
+                      {movieDetail.statusTitle}
+                    </p>
                   </motion.div>
                 </motion.div>
-                <motion.div
-                  whileHover={{ scale: 1.2, rotate: 360 }}
-                  whileTap={{
-                    scale: 1,
-                    rotate: -360,
-                  }}
-                >
-                  <Image
-                    hidden={movieDetail.isTrailer}
-                    src="/play-btn.png"
-                    alt="play"
-                    width={70}
-                    height={0}
-                    className="object-cover rounded-full hover:scale-110 transition-all mr-1 cursor-pointer"
-                    onClick={goToWatch}
-                  />
-                </motion.div>
+                <PlayButton
+                  hidden={movieDetail.isTrailer}
+                  onClick={goToWatch}
+                />
               </div>
               <motion.p variants={FADE_UP_ANIMATION_VARIANTS}>
                 Đây {movieDetail?.description}
@@ -187,7 +178,7 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
           )}
         </DialogContent>
       </Dialog>
-    </Tilt>
+    </div>
   );
 };
 

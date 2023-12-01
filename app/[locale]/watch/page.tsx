@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
+import "rc-slider/assets/index.css";
 import "@/components/styles/frame.scss";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import ReactHlsPlayer from "react-hls-player";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { MovieModel } from "@/models/Movie";
 import { Button } from "@/components/ui/button";
@@ -19,11 +19,11 @@ import MovieCard from "@/components/common/MovieCard";
 import { CastModel } from "@/models/Cast";
 import Loader from "@/components/ui/loader";
 import { defaultImg, errorImage } from "@/components/helpers/image";
+import FrameCustomVideo from "@/components/common/FrameCustomVideo";
 
 const WatchMoviePage = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const vdRef = useRef<any | null>(null);
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const name = searchParams.get("name");
@@ -95,7 +95,7 @@ const WatchMoviePage = () => {
     );
   };
 
-  const Episodes:React.FC = () => {
+  const Episodes: React.FC = () => {
     return (
       <section
         hidden={
@@ -126,7 +126,7 @@ const WatchMoviePage = () => {
     );
   };
 
-  const Servers:React.FC = () => {
+  const Servers: React.FC = () => {
     return (
       <section hidden={!servers?.length || servers?.length <= 1}>
         <p className="font-bold md:text-lg lg:text-xl mb-2">Server:</p>
@@ -238,15 +238,7 @@ const WatchMoviePage = () => {
         </div>
       ) : (
         <div className="flex flex-col gap-3 lg:gap-5">
-          <ReactHlsPlayer
-            playerRef={vdRef}
-            src={serverSelected?.link || ""}
-            autoPlay={Boolean(serverSelected?.link)}
-            controls={true}
-            width="100%"
-            height="auto"
-            className="mb-3 lg:mb-5 max-h-[80vh] rounded-xl cursor-pointer overflow-hidden shadow-xl"
-          />
+          <FrameCustomVideo src={serverSelected?.link} />
           <Servers />
           <Episodes />
           <MovieInfo />

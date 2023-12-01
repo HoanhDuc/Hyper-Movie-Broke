@@ -1,19 +1,41 @@
-import Link from "next/link";
-import React from "react";
-
+/* eslint-disable react/jsx-no-undef */
+"use client";
+import { motion } from "framer-motion";
+import React, { useState } from "react";
+import Image from "next/image";
 interface PlayButtonProps {
-  movieId?: number;
+  hidden?: boolean;
+  onClick: () => void;
 }
 
-const PlayButton: React.FC<PlayButtonProps> = ({ movieId }) => {
-
+const PlayButton: React.FC<PlayButtonProps> = ({ hidden, onClick }) => {
+  const [loading, setLoading] = useState(false);
   return (
-    <Link
-      href={`watch/${movieId}`}
-      className="bannerButton bg-white text-black px-5 py-3 rounded-lg"
-    >
-      Play
-    </Link>
+    <div className="p-2">
+      {loading ? (
+        <div className="w-fit">
+          <span className="loader"></span>
+        </div>
+      ) : (
+        <motion.div
+          animate={{ scale: 1.1 }}
+          transition={{ repeat: Infinity, duration: 1 }}
+        >
+          <Image
+            hidden={hidden}
+            src="/play-btn.png"
+            alt="play"
+            width={70}
+            height={0}
+            className="object-cover rounded-full cursor-pointer"
+            onClick={() => {
+              setLoading(true);
+              onClick();
+            }}
+          />
+        </motion.div>
+      )}
+    </div>
   );
 };
 

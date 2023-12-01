@@ -44,12 +44,11 @@ export default function MainNav() {
             alt=""
             width={150}
             height={50}
-            className="hover:shadow-md hover:shadow-red-600"
           />
         </Link>
         <div className="flex space-x-1 z-50">
-          <LanguageSwitcher />
-          <ModeToggle />
+          {/* <LanguageSwitcher /> */}
+          {/* <ModeToggle /> */}
         </div>
       </nav>
     </motion.header>
