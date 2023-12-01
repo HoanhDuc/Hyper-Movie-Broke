@@ -1,6 +1,6 @@
 import "./globals.scss";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Nova_Square } from "next/font/google";
 import { useLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { ThemeProvider } from "@/app/theme/theme-provider";
@@ -8,7 +8,7 @@ import { Toaster } from "@/components/ui/toaster";
 import MainNav from "@/components/shared/MainNav";
 import Footer from "@/components/shared/footer";
 import { NextIntlClientProvider } from "next-intl";
-const inter = Inter({ subsets: ["latin"] });
+const font = Nova_Square({weight:"400",subsets:["latin"], display:'swap' });
 
 const title = "Hyper API Movie";
 const description = "Hyper API Movie - Free and Fast Update Movies";
@@ -51,7 +51,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={inter.className}>
+      <body className={font.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             <MainNav />

@@ -49,6 +49,7 @@
     "react": "18.2.0",
     "react-country-flags-select": "^1.1.2",
     "react-dom": "18.2.0",
+    "react-full-screen": "^1.1.1",
     "react-hls-player": "^3.0.7",
     "react-messenger-customer-chat": "^0.8.0",
     "react-parallax-tilt": "^1.7.175",

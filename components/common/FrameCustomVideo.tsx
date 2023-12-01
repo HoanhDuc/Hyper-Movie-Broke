@@ -7,12 +7,15 @@ import ReactHlsPlayer from "react-hls-player";
 import Slider from "rc-slider";
 import { PlayIcon, PauseIcon, TransformIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 const FrameCustomVideo: React.FC<any> = ({ src }) => {
   const vdRef = useRef<any | null>(null);
   const [currentTime, setCurrentTime] = useState(0);
-  const [isFullScreen, setIsFullScreen] = useState(false);
   const [playing, setPlaying] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [isControls, setIsControls] = useState(false);
+  const handle = useFullScreenHandle();
 
   useEffect(() => {
     const handleTimeUpdate = () => {
@@ -60,32 +63,27 @@ const FrameCustomVideo: React.FC<any> = ({ src }) => {
     if (vdRef.current) vdRef.current.pause();
   };
 
-    const toggleFullScreen = () => {
-    //   if (vdRef.current) {
-    //     if (document.fullscreenElement) {
-    //       document.exitFullscreen();
-    //     } else {
-    //       vdRef.current.requestFullscreen().catch((err:any) => {
-    //         console.error("Error attempting to enable full-screen mode:", err);
-    //       });
-    //     }
-    //   }
-    setIsFullScreen(!isFullScreen)
-    };
+  const toggleFullScreen = () => {
+    setIsFullScreen(!isFullScreen);
+    if (isFullScreen) handle.exit();
+    else handle.enter();
+  };
 
   return (
-    <div className="relative">
+    <FullScreen handle={handle} className="relative">
       <ReactHlsPlayer
         playerRef={vdRef}
         src={src || ""}
-        autoPlay
+        autoPlay={false}
         controls={false}
         width="100%"
         height="auto"
-        className={`mb-3 lg:mb-5 max-h-[80vh] rounded-xl cursor-pointer overflow-hidden shadow-xl ${
-          isFullScreen && "h-screen w-screen z-50"
+        className={`mb-3 rounded-xl cursor-pointer overflow-hidden shadow-xl ${
+          !isFullScreen && "max-h-[80vh] mb-3 lg:mb-5"
         }`}
         onClick={() => (!playing ? playVideo() : pauseVideo())}
+        onMouseEnter={() => setIsControls(true)}
+        onMouseLeave={() => setIsControls(false)}
       />
       <Image
         hidden={playing}
@@ -93,15 +91,22 @@ const FrameCustomVideo: React.FC<any> = ({ src }) => {
         alt="play"
         width={100}
         height={100}
-        className="absolute top-[46%] left-[46%]"
+        className="absolute top-[40%] left-[35%] lg:left-[47%] cursor-pointer"
         onClick={() => playVideo()}
       />
-      <div className="flex gap-3 items-center backdrop-blur-md py-4 px-2 rounded-md w-full">
-        <div className="text-2xl cursor-pointer">
+      <div
+        className={`cursor-pointer flex gap-3 items-center bg-black/50 py-4 px-2 w-full absolute bottom-0 opacity-0 transition-all ease-linear ${[
+          isControls && "opacity-100",
+          !isFullScreen && "bottom-5",
+        ].join(" ")}`}
+        onMouseEnter={() => setIsControls(true)}
+        onMouseLeave={() => setIsControls(false)}
+      >
+        <div className="text-2xl">
           {!playing ? (
-            <PlayIcon fontSize={"20px"} onClick={playVideo} />
+            <PlayIcon className=" hover:scale-110 ease" onClick={playVideo} />
           ) : (
-            <PauseIcon onClick={pauseVideo} />
+            <PauseIcon className="hover:scale-110 ease" onClick={pauseVideo} />
           )}
         </div>
         <p className="text-sm whitespace-nowrap">{displayTime}</p>
@@ -120,9 +125,12 @@ const FrameCustomVideo: React.FC<any> = ({ src }) => {
             boxShadow: "0 0 0 2px white",
           }}
         />
-        <TransformIcon onClick={toggleFullScreen} />
+        <TransformIcon
+          className="hover:scale-110 ease"
+          onClick={toggleFullScreen}
+        />
       </div>
-    </div>
+    </FullScreen>
   );
 };
 export default FrameCustomVideo;
