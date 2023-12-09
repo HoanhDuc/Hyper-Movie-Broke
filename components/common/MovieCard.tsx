@@ -62,7 +62,7 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
           variants={FADE_RIGHT_ANIMATION_VARIANTS}
           className="text-lg font-bold md:text-xl lg:text-2xl mb-5"
         >
-          Coming Soon Movies:
+          Phim sắp chiếu:
         </motion.h2>
         <div className="grid grid-cols-2 gap-3 md:gap-5 md:grid-cols-3 lg:grid-cols-4">
           {comingSoonMovie?.map((item) => (
@@ -82,7 +82,7 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
           variants={FADE_RIGHT_ANIMATION_VARIANTS}
           className="text-lg font-bold md:text-xl lg:text-2xl mb-5"
         >
-          Trending Movies:
+          Thịnh hành:
         </motion.h2>
         <div className="grid grid-cols-2 gap-3 md:gap-5 md:grid-cols-3 lg:grid-cols-4">
           {trendingMovie?.map((item) => (
@@ -130,14 +130,14 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
                     className="flex gap-5"
                   >
                     <p>
-                      Watched:{" "}
+                      Đã xem:{" "}
                       <span className="text-green-500">
                         {movieDetail.viewNumber}
                       </span>
                     </p>
                     <p>{movieDetail.year}</p>
-                    <p className="border rounded-md p-2">
-                      {movieDetail.statusTitle}
+                    <p>
+                     Đang phát sóng: {movieDetail.statusTitle}
                     </p>
                   </motion.div>
                 </motion.div>
@@ -147,7 +147,7 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
                 />
               </div>
               <motion.p variants={FADE_UP_ANIMATION_VARIANTS}>
-                Đây {movieDetail?.description}
+                <span className="font-bold">{movieDetail?.name}</span>  {movieDetail?.description}
               </motion.p>
               <motion.div
                 variants={FADE_RIGHT_ANIMATION_VARIANTS}
@@ -162,8 +162,7 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
                       className="rounded-md w-12 h-12 lg:w-16 lg:h-16 object-cover"
                     />
                     <div className="text-sm">
-                      <p className="mb-1">Name: {cast.name}</p>
-                      <p>Age: 0</p>
+                      <p className="my-2">{cast.name}</p>
                     </div>
                   </div>
                 ))}

@@ -1,6 +1,6 @@
 import "./globals.scss";
 import type { Metadata } from "next";
-import { Nova_Square } from "next/font/google";
+import { Sawarabi_Gothic } from "next/font/google";
 import { useLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { ThemeProvider } from "@/app/theme/theme-provider";
@@ -8,10 +8,10 @@ import { Toaster } from "@/components/ui/toaster";
 import MainNav from "@/components/shared/MainNav";
 import Footer from "@/components/shared/footer";
 import { NextIntlClientProvider } from "next-intl";
-const font = Nova_Square({weight:"400",subsets:["latin"], display:'swap' });
+const font = Sawarabi_Gothic({weight:"400",subsets:["latin"], display:'swap' });
 
-const title = "Hyper API Movie";
-const description = "Hyper API Movie - Free and Fast Update Movies";
+const title = "Hyper API Movie | Xem phim miễn phí | Chia sẻ API phim";
+const description = "Hyper API Movie - Free and Fast Update Movies. Xem phim miễn phí Full HD. Chia sẻ API phim miễn phí";
 
 export const metadata: Metadata = {
   title,

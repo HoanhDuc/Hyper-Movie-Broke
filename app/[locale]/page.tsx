@@ -90,7 +90,7 @@ export default function Home() {
               </div>
             ) : (
               <Image
-                src="/empty-movie.png"
+                src="/empty.png"
                 alt="play"
                 width={500}
                 height={200}

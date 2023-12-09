@@ -27,7 +27,7 @@ export default function MainNav() {
 
   return (
     <motion.header
-      className={`fixed w-full top-0 z-50 transition-all duration-200 ${
+      className={`fixed w-full top-0 z-[10000] transition-all duration-200 ${
         isScrolled ? "bg-background/80 backdrop-blur-2xl border-b" : ""
       }`}
       initial={{ y: -100 }}

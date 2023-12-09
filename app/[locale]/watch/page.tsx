@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import "rc-slider/assets/index.css";
 import "@/components/styles/frame.scss";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
@@ -129,7 +128,7 @@ const WatchMoviePage = () => {
   const Servers: React.FC = () => {
     return (
       <section hidden={!servers?.length || servers?.length <= 1}>
-        <p className="font-bold md:text-lg lg:text-xl mb-2">Server:</p>
+        <p className="font-bold md:text-lg lg:text-xl mb-2">Kênh (Chuyển nếu lag):</p>
         <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-3">
           {servers?.map((item: LinkModel, index: number) => (
             <Button
@@ -137,7 +136,7 @@ const WatchMoviePage = () => {
               variant={index === server ? "destructive" : "default"}
               onClick={() => handleChangeServer(item, index)}
             >
-              {item.serverName}
+              #{index + 1}
             </Button>
           ))}
         </div>
@@ -152,7 +151,7 @@ const WatchMoviePage = () => {
           variants={FADE_RIGHT_ANIMATION_VARIANTS}
           className="text-lg font-bold md:text-xl lg:text-2xl mb-5"
         >
-          Coming Soon Movies:
+          Phim sắp chiếu:
         </motion.h2>
         <div className="grid grid-cols-2 gap-3 md:gap-5 md:grid-cols-4 lg:grid-cols-6">
           {comingSoonMovie?.map((item) => (
@@ -172,7 +171,7 @@ const WatchMoviePage = () => {
           variants={FADE_RIGHT_ANIMATION_VARIANTS}
           className="text-lg font-bold md:text-xl lg:text-2xl mb-5"
         >
-          Trending Movies:
+          Thịnh hành:
         </motion.h2>
         <div className="grid grid-cols-2 gap-3 md:gap-5 md:grid-cols-4 lg:grid-cols-6">
           {trendingMovie?.map((item) => (
@@ -197,15 +196,15 @@ const WatchMoviePage = () => {
             className="flex gap-5"
           >
             <p>
-              Watched:{" "}
+              Đã xem:{" "}
               <span className="text-green-500">{movieInfo?.viewNumber}</span>
             </p>
             <p>{movieInfo?.year}</p>
-            <p>{movieInfo?.statusTitle}</p>
+            <p>Đang phát sóng: {movieInfo?.statusTitle}</p>
           </motion.div>
         </motion.div>
         <motion.p variants={FADE_UP_ANIMATION_VARIANTS}>
-          Đây {movieInfo?.description}
+          <span className="font-bold">{movieInfo?.name}</span> {movieInfo?.description}
         </motion.p>
         <motion.div
           variants={FADE_RIGHT_ANIMATION_VARIANTS}
@@ -220,8 +219,7 @@ const WatchMoviePage = () => {
                 className="rounded-md w-12 h-12 lg:w-16 lg:h-16 object-cover"
               />
               <div className="text-sm md:text-base">
-                <p className="mb-1">Name: {cast.name}</p>
-                <p>Age: Unknown</p>
+                <p className="my-2">{cast.name}</p>
               </div>
             </div>
           ))}

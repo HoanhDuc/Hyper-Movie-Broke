@@ -9,7 +9,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
     return (
       <div>
-        <p className="mb-2 text-sm font-bold">Keyword:</p>
+        <p className="mb-2 text-sm font-bold">Tên phim, diễn viên, tác giả...</p>
         <input
           type={type}
           className={cn(

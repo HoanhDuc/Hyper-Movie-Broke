@@ -31,7 +31,7 @@ export default function FilterMovie({
   const OrderBy: React.FC = () => {
     return (
       <motion.div>
-        <p className="mb-2 text-sm font-bold">Order by:</p>
+        <p className="mb-2 text-sm font-bold">Lọc theo</p>
         <Select value={orderBy} onValueChange={setOrderBy}>
           <SelectTrigger>
             {orderByOptions.find((item: any) => item.value === orderBy)
@@ -52,7 +52,7 @@ export default function FilterMovie({
   const FilmGenres: React.FC = () => {
     return (
       <motion.div>
-        <p className="mb-2 text-sm font-bold">Film Genres:</p>
+        <p className="mb-2 text-sm font-bold">Thể loại</p>
         <Select value={filmGenres} onValueChange={setFilmGenres}>
           <SelectTrigger>
             {filmGenresOptions.find((item: any) => item.value === filmGenres)
@@ -73,7 +73,7 @@ export default function FilterMovie({
   const Countries: React.FC = () => {
     return (
       <motion.div>
-        <p className="mb-2 text-sm font-bold">Countries:</p>
+        <p className="mb-2 text-sm font-bold">Quốc Gia</p>
         <Select value={countries} onValueChange={setCountries}>
           <SelectTrigger>
             {countriesOptions.find((item: any) => item.value === countries)
@@ -94,7 +94,7 @@ export default function FilterMovie({
   const Year: React.FC = () => {
     return (
       <motion.div>
-        <p className="mb-2 text-sm font-bold">Year:</p>
+        <p className="mb-2 text-sm font-bold">Năm phát hành</p>
         <Select value={year} onValueChange={setYear}>
           <SelectTrigger>
             {orderByOptions.find((item: any) => item.value === year)?.label ||
@@ -115,7 +115,7 @@ export default function FilterMovie({
   const TypeRaw: React.FC = () => {
     return (
       <motion.div>
-        <p className="mb-2 text-sm font-bold">Type Raw:</p>
+        <p className="mb-2 text-sm font-bold">Kiểu phim</p>
         <Select value={typeRaw} onValueChange={setTypeRaw}>
           <SelectTrigger>
             {typeRawOptions.find((item: any) => item.value === typeRaw)
@@ -138,7 +138,7 @@ export default function FilterMovie({
       <Input
         defaultValue={keyword}
         key={Math.random() * 36.4621596072}
-        placeholder="Give me keyword"
+        placeholder="Gõ phim muốn xem"
         onKeyUp={(e) => {
           if (e.code === "Enter") {
             onSubmit();
@@ -181,7 +181,7 @@ export default function FilterMovie({
     return (
       <div className="container mx-auto">
         <motion.h2 className="text-lg font-bold md:text-xl lg:text-2xl mb-3">
-          Filters Movie
+          Bộ lọc
         </motion.h2>
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 lg:gap-4 items-end">
           <Keyword />
@@ -191,10 +191,10 @@ export default function FilterMovie({
           <Countries />
           <Year />
           <Button variant="destructive" onClick={onSubmit}>
-            Filter now
+            Tìm kiếm
           </Button>
           <Button variant="secondary" onClick={handleResetFilter}>
-            Clear Filter
+            Xóa tìm kiếm
           </Button>
         </div>
       </div>

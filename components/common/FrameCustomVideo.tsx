@@ -1,136 +1,115 @@
-/* eslint-disable @next/next/no-img-element */
-"use client";
-import "rc-slider/assets/index.css";
-import "@/components/styles/frame.scss";
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import ReactHlsPlayer from "react-hls-player";
-import Slider from "rc-slider";
-import { PlayIcon, PauseIcon, TransformIcon } from "@radix-ui/react-icons";
-import Image from "next/image";
-import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import { useEffect, useRef, useState } from "react";
+import Artplayer from "artplayer";
+import Hls from "hls.js";
+import { useTheme } from "next-themes";
+import axios from "axios";
 
-const FrameCustomVideo: React.FC<any> = ({ src }) => {
-  const vdRef = useRef<any | null>(null);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [playing, setPlaying] = useState(false);
-  const [isFullScreen, setIsFullScreen] = useState(false);
-  const [isControls, setIsControls] = useState(false);
-  const handle = useFullScreenHandle();
-
+export default function Player({ option, src, getInstance, ...rest }: any) {
+  const artRef = useRef();
+  const { setTheme } = useTheme();
   useEffect(() => {
-    const handleTimeUpdate = () => {
-      if (vdRef.current) setCurrentTime(vdRef.current.currentTime);
-    };
-    if (vdRef.current) {
-      vdRef.current.addEventListener("timeupdate", handleTimeUpdate);
+    if (src){
+        const art = new Artplayer({
+      ...option,
+      url: src,
+      volume: 0.5,
+      isLive: false,
+      muted: false,
+      autoplay: true,
+      pip: true,
+      autoMini: true,
+      screenshot: true,
+      setting: true,
+      loop: true,
+      flip: true,
+      playbackRate: true,
+      aspectRatio: true,
+      fullscreen: true,
+      fullscreenWeb: true,
+      // subtitleOffset: true,
+      miniProgressBar: true,
+      mutex: true,
+      backdrop: true,
+      playsInline: true,
+      autoPlayback: true,
+      airplay: true,
+      theme: "#DC2626",
+      container: artRef.current,
+      thumbnails: {
+        url: "https://img.freepik.com/free-vector/abstract-grunge-style-coming-soon-with-black-splatter_1017-26690.jpg",
+        number: 60,
+        column: 10,
+        width: 160,
+        height: 90
+      },
+      icons: {
+        loading: `<div class="loader"></div>`,
+        state: '<img width="150" heigth="150" class="" src="/play-btn.png">',
+      },
+      moreVideoAttr: {
+        crossOrigin: "anonymous",
+      },
+      quality: [
+        {
+          default: true,
+          html: "SD 480P",
+          url: src,
+        },
+        {
+          html: "HD 720P",
+          url: src,
+        },
+      ],
+      settings: [
+        {
+          html: "Light",
+          tooltip: "OFF",
+          switch: false,
+          onSwitch: function (item) {
+            item.tooltip = item.switch ? "OFF" : "ON";
+            setTheme(item.switch ? "dark" : "light");
+            return !item.switch;
+          },
+        },
+      ],
+      customType: {
+        m3u8: function playM3u8(video, url, art: any) {
+          if (Hls.isSupported()) {
+            if (art.hls) art.hls.destroy();
+            const hls = new Hls();
+            hls.loadSource(url);
+            hls.attachMedia(video);
+            art.hls = hls;
+            art.on("destroy", () => hls.destroy());
+          } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+            video.src = url;
+          } else {
+            art.notice.show = "Unsupported playback format: m3u8";
+          }
+        },
+      },
+    });
+
+    if (getInstance && typeof getInstance === "function") {
+      getInstance(art);
     }
+
     return () => {
-      if (vdRef.current) {
-        vdRef.current.removeEventListener("timeupdate", handleTimeUpdate);
+      if (art && art.destroy) {
+        art.destroy(false);
       }
     };
-  }, []);
-
-  const duration = useMemo(() => {
-    if (vdRef.current?.duration) return vdRef.current.duration;
-    return 0;
-  }, [vdRef.current?.duration]);
-
-  const displayTime = useMemo(() => {
-    const formatDigit = (value: any) => (value < 10 ? `0${value}` : value);
-    const formatSeconds = (seconds: any) => {
-      const minutes = Math.floor(seconds / 60);
-      const remainingSeconds = Math.floor(seconds % 60);
-      return `${formatDigit(minutes)}:${formatDigit(remainingSeconds)}`;
-    };
-    const formattedCurrentTime = formatSeconds(currentTime);
-    const formattedDuration = formatSeconds(duration);
-    return `${formattedCurrentTime} / ${formattedDuration}`;
-  }, [currentTime, duration]);
-
-  const handleSliderChange = (value: any) => {
-    setCurrentTime(value);
-    if (vdRef.current) vdRef.current.currentTime = value;
-  };
-
-  const playVideo = () => {
-    setPlaying(true);
-    if (vdRef.current) vdRef.current.play();
-  };
-
-  const pauseVideo = () => {
-    setPlaying(false);
-    if (vdRef.current) vdRef.current.pause();
-  };
-
-  const toggleFullScreen = () => {
-    setIsFullScreen(!isFullScreen);
-    if (isFullScreen) handle.exit();
-    else handle.enter();
-  };
+    }
+  
+  }, [src]);
 
   return (
-    <FullScreen handle={handle} className="relative">
-      <ReactHlsPlayer
-        playerRef={vdRef}
-        src={src || ""}
-        autoPlay={false}
-        controls={false}
-        width="100%"
-        height="auto"
-        className={`mb-3 rounded-xl cursor-pointer overflow-hidden shadow-xl ${
-          !isFullScreen && "max-h-[80vh] mb-3 lg:mb-5"
-        }`}
-        onClick={() => (!playing ? playVideo() : pauseVideo())}
-        onMouseEnter={() => setIsControls(true)}
-        onMouseLeave={() => setIsControls(false)}
-      />
-      <Image
-        hidden={playing}
-        src="/play-btn.png"
-        alt="play"
-        width={100}
-        height={100}
-        className="absolute top-[40%] left-[35%] lg:left-[47%] cursor-pointer"
-        onClick={() => playVideo()}
-      />
-      <div
-        className={`cursor-pointer flex gap-3 items-center bg-black/50 py-4 px-2 w-full absolute bottom-0 opacity-0 transition-all ease-linear ${[
-          isControls && "opacity-100",
-          !isFullScreen && "bottom-5",
-        ].join(" ")}`}
-        onMouseEnter={() => setIsControls(true)}
-        onMouseLeave={() => setIsControls(false)}
-      >
-        <div className="text-2xl">
-          {!playing ? (
-            <PlayIcon className=" hover:scale-110 ease" onClick={playVideo} />
-          ) : (
-            <PauseIcon className="hover:scale-110 ease" onClick={pauseVideo} />
-          )}
-        </div>
-        <p className="text-sm whitespace-nowrap">{displayTime}</p>
-        <Slider
-          value={currentTime}
-          min={0}
-          max={duration}
-          step={1}
-          keyboard
-          onChange={handleSliderChange}
-          trackStyle={{ backgroundColor: "#ff0000", height: 5 }}
-          railStyle={{ backgroundColor: "#fff", height: 5 }}
-          handleStyle={{
-            borderColor: "#fff",
-            backgroundColor: "#ff0000",
-            boxShadow: "0 0 0 2px white",
-          }}
-        />
-        <TransformIcon
-          className="hover:scale-110 ease"
-          onClick={toggleFullScreen}
-        />
-      </div>
-    </FullScreen>
+    <div
+      ref={artRef}
+      {...rest}
+      className="w-full h-[250px] lg:h-[70vh] mb-3 rounded-xl cursor-pointer overflow-hidden shadow-xl"
+    >
+    </div>
+
   );
-};
-export default FrameCustomVideo;
+}

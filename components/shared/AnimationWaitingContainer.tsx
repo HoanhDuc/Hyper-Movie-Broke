@@ -15,7 +15,7 @@ const AnimationWaiting = ({ children }: any) => {
         hidden: {},
         show: {
           transition: {
-            staggerChildren: 0.15,
+            staggerChildren: 0.1,
           },
         },
       }}

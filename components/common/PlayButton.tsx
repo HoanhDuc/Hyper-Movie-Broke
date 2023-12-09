@@ -19,15 +19,17 @@ const PlayButton: React.FC<PlayButtonProps> = ({ hidden, onClick }) => {
       ) : (
         <motion.div
           animate={{ scale: 1.1 }}
-          transition={{ repeat: Infinity, duration: 1 }}
+          transition={{
+       
+          }}
         >
           <Image
             hidden={hidden}
-            src="/play-btn.png"
+            src="/play-btn.gif"
             alt="play"
-            width={70}
+            width={55}
             height={0}
-            className="object-cover rounded-full cursor-pointer"
+            className="object-scale-down rounded-full cursor-pointer"
             onClick={() => {
               setLoading(true);
               onClick();
