@@ -4,6 +4,24 @@ export const orderByOptions = [
     value: "",
   },
   {
+    label: "New",
+    value: "UpdateOn",
+  },
+  {
+    label: "View Number",
+    value: "ViewNumber",
+  },
+  {
+    label: "Year",
+    value: "Year",
+  },
+];
+export const yearOptions = [
+  {
+    label: "Tất cả",
+    value: "",
+  },
+  {
     label: "Hiện tại",
     value: "2023",
   },

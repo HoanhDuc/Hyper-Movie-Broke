@@ -10,6 +10,7 @@ import {
   filmGenresOptions,
   orderByOptions,
   typeRawOptions,
+  yearOptions,
 } from "@/constants/filter";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -38,7 +39,7 @@ export default function FilterMovie({
               ?.label || "All"}
           </SelectTrigger>
           <SelectContent>
-            {orderByOptions.map((item) => (
+            {orderByOptions.map((item:any) => (
               <SelectItem key={item.value} value={item.value}>
                 <span>{item.label}</span>
               </SelectItem>
@@ -97,11 +98,11 @@ export default function FilterMovie({
         <p className="mb-2 text-sm font-bold">Năm phát hành</p>
         <Select value={year} onValueChange={setYear}>
           <SelectTrigger>
-            {orderByOptions.find((item: any) => item.value === year)?.label ||
+            {yearOptions.find((item: any) => item.value === year)?.label ||
               "All"}
           </SelectTrigger>
           <SelectContent>
-            {orderByOptions.map((item) => (
+            {yearOptions.map((item:any) => (
               <SelectItem key={item.value} value={item.value}>
                 <span>{item.label}</span>
               </SelectItem>
