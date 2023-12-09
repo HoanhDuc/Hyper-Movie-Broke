@@ -6,10 +6,10 @@ function Banner() {
   return (
     <div className="relative w-full">
       <img
-        src="https://wallpapercave.com/wp/wp11386822.jpg"
+        src="https://bloganchoi.com/wp-content/uploads/2021/02/untitled-12-scaled.jpg"
         alt=""
         width="100%"
-        className="object-cover"
+        className="object-cover max-h-[50vh]"
       />
     </div>
   );
