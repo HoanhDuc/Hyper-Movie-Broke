@@ -18,19 +18,19 @@ export const metadata: Metadata = {
   description,
   authors: [
     { name: "Đức" },
-    { name: "Đức", url: "https://ducnhse.vercel.app" },
+    { name: "Đức", url: "https://ducnh.io.vn" },
   ],
   creator: "Hoành Đức",
   verification: {
     google:
-      "google-site-verification=Y5OPaw_tefRfLqkRVuLeOFUahubeU2A7VcL2IpAAFfs",
+      "google-site-verification=6GjheYtUtr7MSz-zSwn5RdE-7bai55g6u34j6TWzOog",
   },
   openGraph: {
     title,
     description,
     images: [{ url: "/opengraph-image.png" }],
   },
-  metadataBase: new URL("https://ducnh.io.vn"),
+  metadataBase: new URL("https://hypermovie.fun"),
   themeColor: "#000",
 };
 export default async function RootLayout({
