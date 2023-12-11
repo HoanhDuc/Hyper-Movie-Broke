@@ -58,7 +58,7 @@ export default function Home() {
     return (
       <div className="container mx-auto flex flex-col gap-5">
         <motion.h1 className="text-lg font-bold md:text-xl lg:text-2xl">
-          Hyper API Movies:
+          Hyper Movies List
         </motion.h1>
         {loading ? (
           <div className="mx-auto">
@@ -104,23 +104,31 @@ export default function Home() {
   };
 
   return (
+    // <FramerContainer>
+    //   <div className="min-h-screen flex flex-col gap-10">
+    //     <HeroBanner />
+    //     <div className="flex flex-col lg:flex-row gap-10 justify-center">
+    //       <iframe
+    //         src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fweb.facebook.com%2Fthocuong.le.3%2Fposts%2Fpfbid0tMD97sZ2Sa1MoZGLQigTEqAdHDrC4pTrbNpzFXehjbn8vmLxH6mRRJy6djgcU6Hsl"
+    //         width="300"
+    //         height="600"
+    //         allowFullScreen={true}
+    //         allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+    //         className="lg:sticky top-16 mx-5"
+    //       ></iframe>
+    //       <div className="flex flex-col gap-10">
+    //         <FilterMovie onFilter={onFilter} />
+    //         <MoviesList />
+    //       </div>
+    //     </div>
+    //     <FacebookChatBox />
+    //   </div>
+    // </FramerContainer>
     <FramerContainer>
       <div className="min-h-screen flex flex-col gap-10">
         <HeroBanner />
-        <div className="flex flex-col lg:flex-row gap-10 justify-center">
-          <iframe
-            src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fweb.facebook.com%2Fthocuong.le.3%2Fposts%2Fpfbid0tMD97sZ2Sa1MoZGLQigTEqAdHDrC4pTrbNpzFXehjbn8vmLxH6mRRJy6djgcU6Hsl"
-            width="300"
-            height="600"
-            allowFullScreen={true}
-            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-            className="lg:sticky top-16 mx-5"
-          ></iframe>
-          <div className="flex flex-col gap-10">
-            <FilterMovie onFilter={onFilter} />
-            <MoviesList />
-          </div>
-        </div>
+        <FilterMovie onFilter={onFilter} />
+        <MoviesList />
         <FacebookChatBox />
       </div>
     </FramerContainer>

@@ -18,14 +18,14 @@ export default function Player({ option, src, getInstance, ...rest }: any) {
       autoplay: true,
       pip: true,
       autoMini: true,
-      screenshot: true,
+      // screenshot: true,
       setting: true,
       loop: true,
       flip: true,
       playbackRate: true,
       aspectRatio: true,
       fullscreen: true,
-      fullscreenWeb: true,
+      // fullscreenWeb: true,
       // subtitleOffset: true,
       miniProgressBar: true,
       mutex: true,
@@ -49,17 +49,17 @@ export default function Player({ option, src, getInstance, ...rest }: any) {
       moreVideoAttr: {
         crossOrigin: "anonymous",
       },
-      quality: [
-        {
-          default: true,
-          html: "SD 480P",
-          url: src,
-        },
-        {
-          html: "HD 720P",
-          url: src,
-        },
-      ],
+      // quality: [
+      //   {
+      //     default: true,
+      //     html: "SD 480P",
+      //     url: src,
+      //   },
+      //   {
+      //     html: "HD 720P",
+      //     url: src,
+      //   },
+      // ],
       settings: [
         {
           html: "Light",

@@ -25,9 +25,9 @@ const PlayButton: React.FC<PlayButtonProps> = ({ hidden, onClick }) => {
         >
           <Image
             hidden={hidden}
-            src="/play-btn.gif"
+            src="/play-btn.png"
             alt="play"
-            width={55}
+            width={50}
             height={0}
             className="object-scale-down rounded-full cursor-pointer"
             onClick={() => {

@@ -47,7 +47,7 @@ export default function MainNav() {
           />
         </Link>
         <div className="flex space-x-1 z-50">
-          {/* <LanguageSwitcher /> */}
+          <LanguageSwitcher />
           {/* <ModeToggle /> */}
         </div>
       </nav>

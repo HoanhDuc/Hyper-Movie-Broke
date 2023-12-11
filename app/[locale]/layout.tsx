@@ -10,8 +10,8 @@ import Footer from "@/components/shared/footer";
 import { NextIntlClientProvider } from "next-intl";
 const font = Sawarabi_Gothic({weight:"400",subsets:["latin"], display:'swap' });
 
-const title = "Hyper API Movie | Xem phim miễn phí | Chia sẻ API phim";
-const description = "Hyper API Movie - Free and Fast Update Movies. Xem phim miễn phí Full HD. Chia sẻ API phim miễn phí";
+const title = "Hyper Movie | Xem phim miễn phí | Chia sẻ API phim";
+const description = "Hyper Movie - Free and Fast Update Movies. Xem phim miễn phí Full HD. Chia sẻ API phim miễn phí";
 
 export const metadata: Metadata = {
   title,

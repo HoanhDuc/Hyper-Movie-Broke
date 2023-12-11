@@ -182,7 +182,7 @@ export default function FilterMovie({
     return (
       <div className="container mx-auto">
         <motion.h2 className="text-lg font-bold md:text-xl lg:text-2xl mb-3">
-          Bộ lọc
+          Lọc Phim
         </motion.h2>
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 lg:gap-4 items-end">
           <Keyword />

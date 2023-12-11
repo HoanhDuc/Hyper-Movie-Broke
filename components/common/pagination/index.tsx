@@ -26,7 +26,7 @@ const PaginationCpn: React.FC<PaginationProps> = ({
       total={totalItem}
       pageSize={pageSize}
       showSizeChanger={false}
-      prevIcon={<p className="text-red-600 font-bold">Previous</p>}
+      prevIcon={<p className="text-red-600 font-bold">Pre</p>}
       nextIcon={<p className="text-red-600 font-bold">Next</p>}
     />
   );
