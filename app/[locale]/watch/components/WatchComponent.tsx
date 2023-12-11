@@ -14,7 +14,7 @@ import {
   FADE_RIGHT_ANIMATION_VARIANTS,
   FADE_UP_ANIMATION_VARIANTS,
 } from "@/constants/animation";
-import MovieCard from "@/components/common/MovieCard";
+// import MovieCard from "@/components/common/MovieCard";
 import { CastModel } from "@/models/Cast";
 import Loader from "@/components/ui/loader";
 import { defaultImg, errorImage } from "@/components/helpers/image";
@@ -34,8 +34,8 @@ const WatchComponent = () => {
   const [movieInfo, setMovieInfo] = useState<MovieModel>();
   const [servers, setServers] = useState<LinkModel[]>();
   const [serverSelected, setServerSelected] = useState<LinkModel>();
-  const [comingSoonMovie, setComingSoonMovie] = useState<MovieModel[]>();
-  const [trendingMovie, setTrendingMovie] = useState<MovieModel[]>();
+  // const [comingSoonMovie, setComingSoonMovie] = useState<MovieModel[]>();
+  // const [trendingMovie, setTrendingMovie] = useState<MovieModel[]>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,18 +45,18 @@ const WatchComponent = () => {
           data: { movie, phimSapChieu, trendingMovies },
         }: any = await axios.get(`/api/movie/${name}`);
         setMovieInfo(new MovieModel(movie));
-        setComingSoonMovie(
-          phimSapChieu?.map((item: any) => new MovieModel(item))
-        );
-        setTrendingMovie(
-          trendingMovies?.map((item: any) => new MovieModel(item))
-        );
+        // setComingSoonMovie(
+        //   phimSapChieu?.map((item: any) => new MovieModel(item))
+        // );
+        // setTrendingMovie(
+        //   trendingMovies?.map((item: any) => new MovieModel(item))
+        // );
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     if (id && name && !movieInfo) fetchData();
-  }, [id, name, searchParams]);
+  }, [id, name]);
 
   useEffect(() => {
     const fetchData = async () => {
