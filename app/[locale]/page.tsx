@@ -21,12 +21,12 @@ export default function Home() {
   const router = useRouter();
   const [movies, setMovies] = useState<MovieModel[]>([]);
   const [pagination, setPagination] = useState<PaginationModel>();
-  const [currentParams, setCurrentParams] = useState<any>();
+  const [currentParams, setCurrentParams] = useState<any>({ orderBy: "Year" });
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetchData();
+    fetchData({ orderBy: "Year" });
   }, []);
 
   const fetchData = async (params?: any) => {

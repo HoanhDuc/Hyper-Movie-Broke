@@ -18,16 +18,24 @@ const PaginationCpn: React.FC<PaginationProps> = ({
   onChange,
 }) => {
 
+  const onChangePage = (page: number) => {
+    window.scroll({
+      top: window.innerHeight,
+      behavior: "smooth",
+    });
+    onChange && onChange(page);
+  };
+
   return (
     <Pagination
       className="pagination-data mt-5 justify-center"
-      onChange={onChange}
+      onChange={onChangePage}
       current={currentPage}
       total={totalItem}
       pageSize={pageSize}
       showSizeChanger={false}
-      prevIcon={<p className="text-red-600 font-bold">Pre</p>}
-      nextIcon={<p className="text-red-600 font-bold">Next</p>}
+      prevIcon={<p className="text-red-600 font-bold text-3xl">-</p>}
+      nextIcon={<p className="text-red-600 font-bold text-3xl">+</p>}
     />
   );
 };

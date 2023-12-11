@@ -13,7 +13,7 @@ import {
   yearOptions,
 } from "@/constants/filter";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
@@ -23,7 +23,7 @@ export default function FilterMovie({
   onFilter: (q: any) => void;
 }) {
   const [keyword, setKeyword] = useState("");
-  const [orderBy, setOrderBy] = useState("");
+  const [orderBy, setOrderBy] = useState("Year");
   const [filmGenres, setFilmGenres] = useState("");
   const [countries, setCountries] = useState("");
   const [typeRaw, setTypeRaw] = useState("");
@@ -39,7 +39,7 @@ export default function FilterMovie({
               ?.label || "All"}
           </SelectTrigger>
           <SelectContent>
-            {orderByOptions.map((item:any) => (
+            {orderByOptions.map((item: any) => (
               <SelectItem key={item.value} value={item.value}>
                 <span>{item.label}</span>
               </SelectItem>
@@ -102,7 +102,7 @@ export default function FilterMovie({
               "All"}
           </SelectTrigger>
           <SelectContent>
-            {yearOptions.map((item:any) => (
+            {yearOptions.map((item: any) => (
               <SelectItem key={item.value} value={item.value}>
                 <span>{item.label}</span>
               </SelectItem>
@@ -137,12 +137,13 @@ export default function FilterMovie({
   const Keyword: React.FC = () => {
     return (
       <Input
+        name="input-keyword"
         defaultValue={keyword}
         key={Math.random() * 36.4621596072}
-        placeholder="Gõ phim muốn xem"
-        onKeyUp={(e) => {
+        placeholder="Nhập kí tự"
+        onKeyUp={(e: any) => {
           if (e.code === "Enter") {
-            onSubmit();
+            console.info("Pressed Enter");
           }
         }}
         onBlur={handleChangeKeyword}

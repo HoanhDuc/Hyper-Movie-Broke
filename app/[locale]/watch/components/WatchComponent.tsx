@@ -8,17 +8,27 @@ import { MovieModel } from "@/models/Movie";
 import { Button } from "@/components/ui/button";
 import { LinkModel } from "@/models/Link";
 import { EpisodeModel } from "@/models/Episode";
-import AnimationWaiting from "@/components/shared/AnimationWaitingContainer";
 import { motion } from "framer-motion";
 import {
   FADE_RIGHT_ANIMATION_VARIANTS,
   FADE_UP_ANIMATION_VARIANTS,
 } from "@/constants/animation";
-// import MovieCard from "@/components/common/MovieCard";
 import { CastModel } from "@/models/Cast";
 import Loader from "@/components/ui/loader";
 import { defaultImg, errorImage } from "@/components/helpers/image";
 import FrameCustomVideo from "@/components/common/FrameCustomVideo";
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  TwitterShareButton,
+  TelegramShareButton,
+  TelegramIcon,
+  TwitterIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
+  FacebookMessengerShareButton,
+  FacebookMessengerIcon,
+} from "next-share";
 
 const WatchComponent = () => {
   const router = useRouter();
@@ -34,8 +44,6 @@ const WatchComponent = () => {
   const [movieInfo, setMovieInfo] = useState<MovieModel>();
   const [servers, setServers] = useState<LinkModel[]>();
   const [serverSelected, setServerSelected] = useState<LinkModel>();
-  // const [comingSoonMovie, setComingSoonMovie] = useState<MovieModel[]>();
-  // const [trendingMovie, setTrendingMovie] = useState<MovieModel[]>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,12 +53,6 @@ const WatchComponent = () => {
           data: { movie, phimSapChieu, trendingMovies },
         }: any = await axios.get(`/api/movie/${name}`);
         setMovieInfo(new MovieModel(movie));
-        // setComingSoonMovie(
-        //   phimSapChieu?.map((item: any) => new MovieModel(item))
-        // );
-        // setTrendingMovie(
-        //   trendingMovies?.map((item: any) => new MovieModel(item))
-        // );
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -101,7 +103,7 @@ const WatchComponent = () => {
           !movieInfo?.episodes?.length || movieInfo?.episodes?.length <= 1
         }
       >
-        <p className="font-bold md:text-lg lg:text-xl mb-2">Episodes:</p>
+        <p className="font-bold md:text-lg lg:text-xl mb-2">Danh sách tập</p>
         <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-3">
           {movieInfo?.episodes.map((item: EpisodeModel, index: number) => (
             <Button
@@ -128,7 +130,9 @@ const WatchComponent = () => {
   const Servers: React.FC = () => {
     return (
       <section hidden={!servers?.length || servers?.length <= 1}>
-        <p className="font-bold md:text-lg lg:text-xl mb-2">Kênh (Chuyển nếu lag):</p>
+        <p className="font-bold md:text-lg lg:text-xl mb-2">
+          Danh sách nguồn
+        </p>
         <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-3">
           {servers?.map((item: LinkModel, index: number) => (
             <Button
@@ -143,46 +147,6 @@ const WatchComponent = () => {
       </section>
     );
   };
-
-  // const ComingSoonList: React.FC = () => {
-  //   return (
-  //     <AnimationWaiting>
-  //       <motion.h2
-  //         variants={FADE_RIGHT_ANIMATION_VARIANTS}
-  //         className="text-lg font-bold md:text-xl lg:text-2xl mb-5"
-  //       >
-  //         Phim sắp chiếu:
-  //       </motion.h2>
-  //       <div className="grid grid-cols-2 gap-3 md:gap-5 md:grid-cols-4 lg:grid-cols-6">
-  //         {comingSoonMovie?.map((item) => (
-  //           <motion.div variants={FADE_RIGHT_ANIMATION_VARIANTS} key={item.id}>
-  //             <MovieCard movieInfo={item} />
-  //           </motion.div>
-  //         ))}
-  //       </div>
-  //     </AnimationWaiting>
-  //   );
-  // };
-
-  // const TrendingList: React.FC = () => {
-  //   return (
-  //     <AnimationWaiting>
-  //       <motion.h2
-  //         variants={FADE_RIGHT_ANIMATION_VARIANTS}
-  //         className="text-lg font-bold md:text-xl lg:text-2xl mb-5"
-  //       >
-  //         Thịnh hành:
-  //       </motion.h2>
-  //       <div className="grid grid-cols-2 gap-3 md:gap-5 md:grid-cols-4 lg:grid-cols-6">
-  //         {trendingMovie?.map((item) => (
-  //           <motion.div variants={FADE_RIGHT_ANIMATION_VARIANTS} key={item.id}>
-  //             <MovieCard movieInfo={item} />
-  //           </motion.div>
-  //         ))}
-  //       </div>
-  //     </AnimationWaiting>
-  //   );
-  // };
 
   const MovieInfo: React.FC = () => {
     return (
@@ -204,7 +168,8 @@ const WatchComponent = () => {
           </motion.div>
         </motion.div>
         <motion.p variants={FADE_UP_ANIMATION_VARIANTS}>
-          <span className="font-bold">{movieInfo?.name}</span> {movieInfo?.description}
+          <span className="font-bold">{movieInfo?.name}</span>{" "}
+          {movieInfo?.description}
         </motion.p>
         <motion.div
           variants={FADE_RIGHT_ANIMATION_VARIANTS}
@@ -228,6 +193,42 @@ const WatchComponent = () => {
     );
   };
 
+  const ShareBlock: React.FC = () => {
+    return (
+      <div className="flex gap-3">
+        <p className="text-xl font-bold">Chia sẻ: </p>
+        <FacebookShareButton
+          url={window.location.href}
+          quote={movieInfo?.description}
+          hashtag={"#hypermovie"}
+        >
+          <FacebookIcon size={32} round />
+        </FacebookShareButton>
+        <TelegramShareButton
+          url={window.location.href}
+          title={movieInfo?.description}
+        >
+          <TelegramIcon size={32} round />
+        </TelegramShareButton>
+        <TwitterShareButton
+          url={window.location.href}
+          title={movieInfo?.description}
+        >
+          <TwitterIcon size={32} round />
+        </TwitterShareButton>
+        <LinkedinShareButton url={window.location.href}>
+          <LinkedinIcon size={32} round />
+        </LinkedinShareButton>
+        <FacebookMessengerShareButton
+          url={window.location.href}
+          appId="4639220812794134"
+        >
+          <FacebookMessengerIcon size={32} round />
+        </FacebookMessengerShareButton>
+      </div>
+    );
+  };
+
   return (
     <div className="py-14 lg:py-20 container mx-auto">
       {loading ? (
@@ -237,15 +238,14 @@ const WatchComponent = () => {
       ) : (
         <div className="flex flex-col gap-3 lg:gap-5">
           <FrameCustomVideo src={serverSelected?.link} />
+          <ShareBlock />
           <Servers />
           <Episodes />
           <MovieInfo />
-          {/* <ComingSoonList />
-          <TrendingList /> */}
         </div>
       )}
     </div>
   );
 };
- 
+
 export default WatchComponent;

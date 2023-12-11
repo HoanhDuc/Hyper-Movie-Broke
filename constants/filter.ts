@@ -4,15 +4,15 @@ export const orderByOptions = [
     value: "",
   },
   {
-    label: "New",
+    label: "Mới",
     value: "UpdateOn",
   },
   {
-    label: "View Number",
+    label: "Xem nhiều nhất",
     value: "ViewNumber",
   },
   {
-    label: "Year",
+    label: "Năm",
     value: "Year",
   },
 ];
