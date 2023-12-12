@@ -1,5 +1,4 @@
 import "./globals.scss";
-import type { Metadata } from "next";
 import { Sawarabi_Gothic } from "next/font/google";
 import { useLocale } from "next-intl";
 import { notFound } from "next/navigation";

@@ -30,6 +30,7 @@ import {
 } from "next-share";
 import { getDetailMovie, getPlayMovie } from "@/services/movie";
 
+
 const WatchComponent:React.FC<any> = () => {
   const router = useRouter();
   const pathname = usePathname();
@@ -141,9 +142,9 @@ const WatchComponent:React.FC<any> = () => {
     return (
       <div className="lg:text-xl flex flex-col gap-3 lg:gap-5 overflow-y-auto">
         <motion.div variants={FADE_UP_ANIMATION_VARIANTS}>
-          <p className="font-bold md:text-2xl lg:text-4xl mb-3">
+          <h1 className="font-bold md:text-2xl lg:text-4xl mb-3">
             {movieInfo?.name}
-          </p>
+          </h1>
           <motion.div
             variants={FADE_UP_ANIMATION_VARIANTS}
             className="flex gap-5"
@@ -185,7 +186,7 @@ const WatchComponent:React.FC<any> = () => {
   const ShareBlock: React.FC = useCallback(() => {
     return (
       <>
-      {window.location.href && <div className="flex gap-3">
+      {movieInfo && <div className="flex gap-3">
         <p className="text-xl font-bold">Chia sẻ: </p>
         <FacebookShareButton
           url={window.location.href}
@@ -218,7 +219,7 @@ const WatchComponent:React.FC<any> = () => {
       </div>}
       </>
     );
-  },[window]);
+  },[movieInfo]);
 
   return (
     <div className="py-14 lg:py-20 container mx-auto">

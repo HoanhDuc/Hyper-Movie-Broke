@@ -1,13 +1,14 @@
 import React from "react";
 import WatchSection from "@/components/section/WatchSection";
 import axios from "axios";
-import { Metadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
 import { MovieModel } from "@/models/Movie";
 
 export const generateMetadata = async ({
   searchParams,
-}: any): Promise<Metadata> => {
+}: any, parent: ResolvingMetadata): Promise<Metadata> => {
   const { name } = searchParams;
+  const prevImages = (await parent).openGraph?.images || []
   const {
     data: { movie },
   }: any = await axios.get(
@@ -26,9 +27,9 @@ export const generateMetadata = async ({
     openGraph: {
       title: `${movieModel.name || "Unknown"} | Hyper Movie`,
       description: `${movieModel?.description || "Unknown"} | Hyper Movie`,
-      images: movieModel?.thumbnail,
+      images: [movieModel?.thumbnail, ...prevImages],
     },
-    metadataBase: new URL("https://hypermovie.fun"),
+    metadataBase: new URL(`https://hypermovie.fun`),
     themeColor: "#000",
   };
 };
