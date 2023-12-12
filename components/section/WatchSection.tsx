@@ -184,37 +184,39 @@ const WatchComponent:React.FC<any> = () => {
 
   const ShareBlock: React.FC = useCallback(() => {
     return (
-      <div className="flex gap-3">
+      <>
+      {window.location.href && <div className="flex gap-3">
         <p className="text-xl font-bold">Chia sẻ: </p>
         <FacebookShareButton
-          url={window?.location?.href}
-          quote={movieInfo?.description}
+          url={window.location.href}
+          quote={movieInfo?.name}
           hashtag={"#hypermovie"}
         >
           <FacebookIcon size={32} round />
         </FacebookShareButton>
         <TelegramShareButton
-          url={window?.location?.href}
-          title={movieInfo?.description}
+          url={window.location.href}
+          title={movieInfo?.name}
         >
           <TelegramIcon size={32} round />
         </TelegramShareButton>
         <TwitterShareButton
-          url={window?.location?.href}
-          title={movieInfo?.description}
+          url={window.location.href}
+          title={movieInfo?.name}
         >
           <TwitterIcon size={32} round />
         </TwitterShareButton>
-        <LinkedinShareButton url={window?.location?.href}>
+        <LinkedinShareButton url={window.location.href}>
           <LinkedinIcon size={32} round />
         </LinkedinShareButton>
         <FacebookMessengerShareButton
-          url={window?.location?.href}
+          url={window.location.href}
           appId="4639220812794134"
         >
           <FacebookMessengerIcon size={32} round />
         </FacebookMessengerShareButton>
-      </div>
+      </div>}
+      </>
     );
   },[window]);
 
