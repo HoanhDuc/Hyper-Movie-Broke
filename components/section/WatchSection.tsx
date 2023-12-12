@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import "@/components/styles/frame.scss";
-import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { MovieModel } from "@/models/Movie";
@@ -29,8 +28,9 @@ import {
   FacebookMessengerShareButton,
   FacebookMessengerIcon,
 } from "next-share";
+import { getDetailMovie, getPlayMovie } from "@/services/movie";
 
-const WatchComponent = () => {
+const WatchComponent = ({ movieInfoProp }: any) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -46,28 +46,20 @@ const WatchComponent = () => {
   const [serverSelected, setServerSelected] = useState<LinkModel>();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const {
-          data: { movie, phimSapChieu, trendingMovies },
-        }: any = await axios.get(`/api/movie/${name}`);
-        setMovieInfo(new MovieModel(movie));
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+    const fetch = async () => {
+      setLoading(true)
+      const { movie }: any = await getDetailMovie(name as string);
+      setMovieInfo(new MovieModel(movie));
     };
-    if (id && name && !movieInfo) fetchData();
-  }, [id, name]);
+    if (name) fetch()
+  }, [name]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data }: any = await axios.get("/api/play/get", {
-          params: {
-            movieId: id,
-            episodeId: selectedEpisodeId || movieInfo?.episodes[0].id,
-          },
+        const data = await getPlayMovie({
+          movieId: Number(id),
+          episodeId: selectedEpisodeId || movieInfo?.episodes?.[0].id,
         });
         setLoading(false);
         setServerSelected(new LinkModel(data?.[0]));
@@ -83,8 +75,7 @@ const WatchComponent = () => {
     window.scroll({ top: 0, behavior: "smooth" });
     setSelectedEpisodeId(idEp);
     router.replace(
-      `${pathname}?id=${id}&name=${name}&episodeId=${idEp}&server=${server}`,
-      {}
+      `${pathname}?id=${id}&name=${name}&episodeId=${idEp}&server=${server}`
     );
   };
 
@@ -105,7 +96,7 @@ const WatchComponent = () => {
       >
         <p className="font-bold md:text-lg lg:text-xl mb-2">Danh sách tập</p>
         <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-3">
-          {movieInfo?.episodes.map((item: EpisodeModel, index: number) => (
+          {movieInfo?.episodes?.map((item: EpisodeModel, index: number) => (
             <Button
               key={item.id}
               variant={
@@ -130,9 +121,7 @@ const WatchComponent = () => {
   const Servers: React.FC = () => {
     return (
       <section hidden={!servers?.length || servers?.length <= 1}>
-        <p className="font-bold md:text-lg lg:text-xl mb-2">
-          Danh sách nguồn
-        </p>
+        <p className="font-bold md:text-lg lg:text-xl mb-2">Danh sách nguồn</p>
         <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-3">
           {servers?.map((item: LinkModel, index: number) => (
             <Button

@@ -1,5 +1,5 @@
 import React from "react";
-import WatchComponent from "./components/WatchComponent";
+import WatchComponent from "@/components/section/WatchSection";
 import axios from "axios";
 import { Metadata } from "next";
 import { MovieModel } from "@/models/Movie";
@@ -13,8 +13,8 @@ export const generateMetadata = async ({
   }: any = await axios.get(
     `${process.env.NEXT_PUBLIC_API_MOTPHIM}/movie/${name}`
   );
-  const movieModel = new MovieModel(movie)
-  
+  const movieModel = new MovieModel(movie);
+
   return {
     title: `${movieModel.name || "Unknown"} | Hyper Movie`,
     description: `${movieModel?.description || "Unknown"} | Hyper Movie`,
@@ -32,6 +32,6 @@ export const generateMetadata = async ({
   };
 };
 
-export default function page() {
+export default async function page() {
   return <WatchComponent />;
 }

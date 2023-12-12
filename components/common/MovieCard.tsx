@@ -7,7 +7,6 @@ import YouTube from "react-youtube";
 import Loader from "@/components/ui/loader";
 import { CastModel } from "@/models/Cast";
 import AnimationWaiting from "@/components/shared/AnimationWaitingContainer";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import {
@@ -16,8 +15,8 @@ import {
 } from "@/constants/animation";
 import { extractVideoId } from "@/components/helpers/youtube";
 import { defaultImg, errorImage } from "@/components/helpers/image";
-import Tilt from "react-parallax-tilt";
 import PlayButton from "./PlayButton";
+import { getDetailMovie } from "@/services/movie";
 
 const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
   const router = useRouter();
@@ -28,9 +27,9 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
 
   const fetchMovieDetail = async () => {
     try {
-      const {
-        data: { movie, phimSapChieu, trendingMovies },
-      }: any = await axios.get(`/api/movie/${movieInfo.link}`);
+      const { movie, phimSapChieu, trendingMovies }: any = await getDetailMovie(
+        movieInfo?.link
+      );
       setMovieDetail(new MovieModel(movie));
       setComingSoonMovie(
         phimSapChieu?.map((item: any) => new MovieModel(item))
@@ -42,8 +41,6 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
       console.error("Error fetching data:", error);
     }
   };
-
-
 
   const openDetail = async () => {
     setVisiblePreviewInfo(true);
@@ -136,9 +133,7 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
                       </span>
                     </p>
                     <p>{movieDetail.year}</p>
-                    <p>
-                     Đang phát sóng: {movieDetail.statusTitle}
-                    </p>
+                    <p>Đang phát sóng: {movieDetail.statusTitle}</p>
                   </motion.div>
                 </motion.div>
                 <PlayButton
@@ -147,7 +142,8 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
                 />
               </div>
               <motion.p variants={FADE_UP_ANIMATION_VARIANTS}>
-                <span className="font-bold">{movieDetail?.name}</span>  {movieDetail?.description}
+                <span className="font-bold">{movieDetail?.name}</span>{" "}
+                {movieDetail?.description}
               </motion.p>
               <motion.div
                 variants={FADE_RIGHT_ANIMATION_VARIANTS}

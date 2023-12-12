@@ -1,7 +1,6 @@
 import { EpisodeModel } from "@/models/Episode";
 import { ICast, IEpisodes, IMovie } from "@/models/interfaces/MovieInterface";
 import { CastModel } from "@/models/Cast";
-
 export class MovieModel {
   private _Id: number;
   private _Name: string;
@@ -70,7 +69,7 @@ export class MovieModel {
   }
 
   get episodes(): EpisodeModel[] {
-    return this._Episodes.map((item) => new EpisodeModel(item));
+    return this._Episodes?.map((item) => new EpisodeModel(item));
   }
 
   get statusTitle(): string {

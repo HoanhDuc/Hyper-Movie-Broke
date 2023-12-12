@@ -21,9 +21,7 @@ export async function GET(request: Request) {
       `${process.env.NEXT_PUBLIC_API_MOTPHIM}/search`,
       { params }
     );
-    return new Response(
-      JSON.stringify({ records: data.Records, pagination: data.Pagination })
-    );
+    return new Response(JSON.stringify(data));
   } catch (error: any) {
     console.error("Error fetching data:", error.message);
   }

@@ -1,7 +1,19 @@
-import axios from "@/axios";
+import axios from "axios";
 
-const nameGetTopView = "/movie/topview";
+export const getMovies = async (params: any) => {
+  return await axios.get(`api/search`, {
+    params,
+  });
+};
 
-export const getTopViews = async () => {
-  return await axios.get(nameGetTopView);
+export const detailMovie = async (name: string, params: any) => {
+  return await axios.get(`api/movie/${name}`, {
+    params,
+  });
+};
+
+export const playMovie = async (params: any) => {
+  return await axios.get(`api/play/get`, {
+    params,
+  });
 };
