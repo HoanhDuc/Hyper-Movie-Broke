@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import "@/components/styles/frame.scss";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { MovieModel } from "@/models/Movie";
 import { Button } from "@/components/ui/button";
@@ -30,7 +30,7 @@ import {
 } from "next-share";
 import { getDetailMovie, getPlayMovie } from "@/services/movie";
 
-const WatchComponent = ({ movieInfoProp }: any) => {
+const WatchComponent:React.FC<any> = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -182,41 +182,41 @@ const WatchComponent = ({ movieInfoProp }: any) => {
     );
   };
 
-  const ShareBlock: React.FC = () => {
+  const ShareBlock: React.FC = useCallback(() => {
     return (
       <div className="flex gap-3">
         <p className="text-xl font-bold">Chia sẻ: </p>
         <FacebookShareButton
-          url={window.location.href}
+          url={window?.location?.href}
           quote={movieInfo?.description}
           hashtag={"#hypermovie"}
         >
           <FacebookIcon size={32} round />
         </FacebookShareButton>
         <TelegramShareButton
-          url={window.location.href}
+          url={window?.location?.href}
           title={movieInfo?.description}
         >
           <TelegramIcon size={32} round />
         </TelegramShareButton>
         <TwitterShareButton
-          url={window.location.href}
+          url={window?.location?.href}
           title={movieInfo?.description}
         >
           <TwitterIcon size={32} round />
         </TwitterShareButton>
-        <LinkedinShareButton url={window.location.href}>
+        <LinkedinShareButton url={window?.location?.href}>
           <LinkedinIcon size={32} round />
         </LinkedinShareButton>
         <FacebookMessengerShareButton
-          url={window.location.href}
+          url={window?.location?.href}
           appId="4639220812794134"
         >
           <FacebookMessengerIcon size={32} round />
         </FacebookMessengerShareButton>
       </div>
     );
-  };
+  },[window]);
 
   return (
     <div className="py-14 lg:py-20 container mx-auto">
