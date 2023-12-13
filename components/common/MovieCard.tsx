@@ -17,7 +17,6 @@ import { extractVideoId } from "@/components/helpers/youtube";
 import { defaultImg, errorImage } from "@/components/helpers/image";
 import PlayButton from "./PlayButton";
 import { getDetailMovie } from "@/services/movie";
-import Image from "next/image";
 
 const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
   const router = useRouter();
@@ -97,7 +96,7 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
     // <Tilt glareEnable glareBorderRadius={"8px"}>
     <div className="relative overflow-hidden rounded-md">
       <div className="cursor-pointer" onClick={openDetail}>
-        <Image
+        <img
           src={movieInfo?.poster}
           alt={movieInfo?.name}
           width={0}
