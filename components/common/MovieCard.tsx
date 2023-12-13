@@ -99,6 +99,8 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
         <img
           src={movieInfo?.poster}
           alt={movieInfo?.name}
+          width={"auto"}
+          height={"auto"}
           className="w-full h-[300px] object-cover hover:scale-105 transition-all ease-out"
         />
         <div className="absolute left-0 top-3 p-2 bg-red-500 rounded-r-md text-xs md:text-sm">
