@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import React from 'react';
 
 const Footer = () => {
@@ -8,9 +9,9 @@ const Footer = () => {
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
             <a href="https://flowbite.com/" className="flex items-center">
-              <img
+              <Image
                 src="/logo.png"
-                className="h-10 lg:h-16 me-3"
+                className="w-auto h-10 lg:h-16 me-3"
                 height={50}
                 width={200}
                 alt="FlowBite Logo"

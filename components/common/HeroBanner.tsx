@@ -1,15 +1,15 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
-import { MovieModel } from "@/models/Movie";
+import Image from "next/image";
 
 function Banner() {
   return (
     <div className="relative w-full">
-      <img
+      <Image
         src="/banner.png"
         alt=""
-        width="100%"
-        className="max-h-screen object-cover"
+        width={0}
+        height={0}
+        className="w-auto h-auto max-h-screen object-cover"
       />
     </div>
   );
