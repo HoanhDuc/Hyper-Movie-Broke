@@ -6,7 +6,7 @@ function Banner() {
   return (
     <div className="relative w-full">
       <img
-        src="https://i.redd.it/netflix-sweet-home-2-teaser-poster-2-premieres-december-1-v0-yebtbreh31zb1.jpg?width=2048&format=pjpg&auto=webp&s=4e3e6b3fd1272d8869270d8024b8a1a6870cc81c"
+        src="/banner.png"
         alt=""
         width="100%"
         className="max-h-screen object-cover"
