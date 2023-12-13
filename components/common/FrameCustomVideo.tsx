@@ -44,7 +44,7 @@ export default function Player({ option, src, getInstance, ...rest }: any) {
       },
       icons: {
         loading: `<div class="loader"></div>`,
-        state: '<img width="150" heigth="150" class="" src="/play-btn.png">',
+        state: '<img width="150" height="150" class="" src="/play-btn.png" />',
       },
       moreVideoAttr: {
         crossOrigin: "anonymous",

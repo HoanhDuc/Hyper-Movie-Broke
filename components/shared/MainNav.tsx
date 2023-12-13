@@ -38,7 +38,7 @@ export default function MainNav() {
         className="mx-auto flex max-w-7xl items-center justify-between p-2 lg:px-8"
         aria-label="Global"
       >
-        <Link href={"/"}>
+        <Link href={"/"}  aria-label="Back to Home">
           <Image
             src={"/logo.png"}
             alt=""

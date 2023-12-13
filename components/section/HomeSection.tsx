@@ -3,7 +3,6 @@ import HeroBanner from "@/components/common/HeroBanner";
 import MovieCard from "@/components/common/MovieCard";
 import FilterMovie from "@/components/content/FilterMovie";
 import AnimationWaiting from "@/components/shared/AnimationWaitingContainer";
-import FacebookChatBox from "@/components/shared/FaceBookChatBox";
 import FramerContainer from "@/components/shared/FramerContainer";
 import { FADE_RIGHT_ANIMATION_VARIANTS } from "@/constants/animation";
 import { MovieModel } from "@/models/Movie";
@@ -104,7 +103,6 @@ export default function Home() {
         <HeroBanner />
         <FilterMovie onFilter={onFilter} />
         <MoviesList />
-        <FacebookChatBox />
       </div>
     </FramerContainer>
   );

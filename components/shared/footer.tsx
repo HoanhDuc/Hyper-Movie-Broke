@@ -10,7 +10,9 @@ const Footer = () => {
             <a href="https://flowbite.com/" className="flex items-center">
               <img
                 src="/logo.png"
-                className=" h-10 lg:h-16 me-3"
+                className="h-10 lg:h-16 me-3"
+                height={50}
+                width={200}
                 alt="FlowBite Logo"
               />
             </a>
@@ -61,7 +63,7 @@ const Footer = () => {
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             © 2023{' '}
-            <a href="" className="hover:underline">
+            <a href="https://hypermovie.fun" className="hover:underline"  aria-label="Back to Home">
               Hyper Movie
             </a>
             . All Rights Reserved.
