@@ -9,7 +9,7 @@ export const generateMetadata = async (
   { searchParams }: any,
   parent: ResolvingMetadata
 ): Promise<Metadata> => {
-  const { name, episodeId } = searchParams;
+  const { name, id, episodeId } = searchParams;
   const prevImages = (await parent).openGraph?.images || [];
   const {
     data: { movie },
@@ -22,22 +22,21 @@ export const generateMetadata = async (
         (item: EpisodeModel) => item.id === Number(episodeId)
       )
     : { name: movieModel?.episodes?.[0]?.name || "Tập 1" };
-
   return {
     title: {
-      absolute: `${movieModel.name || "Unknown"} - ${
-        episodeDp?.name
-      } | ${movieModel.statusTitle} | Hyper Movie`,
+      absolute: `Xem ${movieModel?.seoTitle} - ${episodeDp?.name} | Hyper Movie`,
     },
-    description: `${movieModel?.description || "Unknown"} | Hyper Movie`,
+    description: `${movieModel?.seoDescription} | Hyper Movie`,
     verification: {
       google:
         "google-site-verification=6GjheYtUtr7MSz-zSwn5RdE-7bai55g6u34j6TWzOog",
     },
     openGraph: {
-      title: `${movieModel.name || "Unknown"} | Hyper Movie`,
-      description: `${movieModel?.description || "Unknown"} | Hyper Movie`,
+      title: `Xem ${movieModel?.seoTitle} - ${episodeDp?.name} | Hyper Movie`,
+      description: `${movieModel?.seoDescription} | Hyper Movie`,
       images: [movieModel?.thumbnail, ...prevImages],
+      siteName: "Hyper Movie",
+      url: `https://hypermovie.fun/watch?id=${id}&name=${name}`,
     },
     metadataBase: new URL(`https://hypermovie.fun`),
     themeColor: "#000",

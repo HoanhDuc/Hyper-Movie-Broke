@@ -22,6 +22,9 @@ export class MovieModel {
   private _EpisodeTrailer: IEpisodes[];
   private _Trailer?: string;
   private _Casts?: ICast[];
+  private _SeoTitle: string;
+  private _SeoDescription: string;
+  private _Keyword: string;
   constructor(movie: IMovie) {
     this._Id = movie.Id;
     this._Name = movie.Name;
@@ -43,9 +46,24 @@ export class MovieModel {
     this._EpisodeTrailer = movie.EpisodeTrailer;
     this._Trailer = movie?.Trailer;
     this._Casts = movie?.Casts;
+    this._SeoTitle = movie?.SeoTitle;
+    this._SeoDescription = movie?.SeoDescription;
+    this._Keyword = movie?.Keyword;
   }
   get id(): number {
     return this._Id;
+  }
+
+  get seoTitle(): string {
+    return this._SeoTitle;
+  }
+
+  get seoDescription(): string {
+    return this._SeoDescription;
+  }
+
+  get keyword(): string {
+    return this._Keyword;
   }
 
   get thumbnail(): string {

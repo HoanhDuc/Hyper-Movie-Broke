@@ -193,11 +193,11 @@ export default function FilterMovie({
   const Filters: React.FC = () => {
     return (
       <div className="container mx-auto z-50 bg-[#09090b] py-5">
-        <motion.div className="text-lg font-bold md:text-xl lg:text-2xl bg-red-600 p-3 md:p-5 rounded-t-md cursor-pointer flex justify-between items-center">
+        <motion.div className="text-lg font-bold md:text-xl lg:text-2xl bg-hyper-movie p-3 md:p-5 rounded-t-md cursor-pointer flex justify-between items-center">
           Bộ Lọc Hyper Movie
           <TextAlignBottomIcon width={25} height={25} />
         </motion.div>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 lg:gap-4 items-end p-5 border-2 border-t-0 border-red-600 rounded-b-lg">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 lg:gap-4 items-end p-5 border-2 border-t-0 border-hyper-movie rounded-b-lg">
           <Keyword />
           <OrderBy />
           <TypeRaw />

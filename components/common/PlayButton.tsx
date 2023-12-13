@@ -12,31 +12,28 @@ const PlayButton: React.FC<PlayButtonProps> = ({ hidden, onClick }) => {
   const [loading, setLoading] = useState(false);
   return (
     <div className="p-2">
-      {loading ? (
-        <div className="w-fit">
-          <span className="loader"></span>
-        </div>
-      ) : (
+      <motion.div
+        className="py-2 px-4 flex justify-between items-center gap-3 bg-hyper-movie rounded-md hover:scale-110 transition-all cursor-pointer"
+        onClick={() => {
+          setLoading(true);
+          onClick();
+        }}
+      >
+        <p>Play Now</p>
         <motion.div
-          animate={{ scale: 1.1 }}
-          transition={{
-       
-          }}
+          animate={{ rotate: loading ? 360 : 0 }}
+          transition={{ ease: "linear", duration: 0.5, repeat: Infinity }}
         >
-          <Image
-            hidden={hidden}
-            src="/play-icon.png"
-            alt="play"
-            width={50}
-            height={0}
-            className="object-scale-down rounded-full cursor-pointer"
-            onClick={() => {
-              setLoading(true);
-              onClick();
-            }}
-          />
+            <Image
+              hidden={hidden}
+              src="/play-icon.png"
+              alt="play"
+              width={40}
+              height={0}
+              className="object-cover rounded-full cursor-pointer"
+            />
         </motion.div>
-      )}
+      </motion.div>
     </div>
   );
 };

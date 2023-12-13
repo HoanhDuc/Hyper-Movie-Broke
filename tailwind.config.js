@@ -2,10 +2,10 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './variants/**/*.{ts,tsx}',
-	],
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./variants/**/*.{ts,tsx}",
+  ],
   theme: {
     container: {
       center: true,
@@ -14,13 +14,9 @@ module.exports = {
         "2xl": "1400px",
       },
     },
-    colors:{
-      red: {
-        "600": "#DC2626"
-      }
-    },
     extend: {
       colors: {
+        "hyper-movie": "#DC2626",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -77,4 +73,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};
