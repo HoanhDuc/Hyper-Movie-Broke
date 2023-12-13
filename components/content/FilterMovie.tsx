@@ -17,7 +17,6 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Accordion from "../ui/accordion";
 import { TextAlignBottomIcon } from "@radix-ui/react-icons";
 
 export default function FilterMovie({

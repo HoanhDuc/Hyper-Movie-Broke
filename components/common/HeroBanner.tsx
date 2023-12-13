@@ -9,7 +9,7 @@ function Banner() {
         alt=""
         width={1920}
         height={1080}
-        className="w-screen h-screen max-h-screen object-cover"
+        className="w-screen h-[80vh] max-h-screen object-cover"
       />
     </div>
   );

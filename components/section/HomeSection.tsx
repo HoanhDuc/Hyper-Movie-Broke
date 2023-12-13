@@ -13,6 +13,7 @@ import Loader from "@/components/ui/loader";
 import Image from "next/image";
 import { PaginationModel } from "@/models/Pagination";
 import { getListMovies } from "@/services/movie";
+import ContactForm from "@/components/content/ContactUsForm";
 
 export default function Home() {
   const [movies, setMovies] = useState<MovieModel[]>([]);
@@ -50,7 +51,7 @@ export default function Home() {
 
   const MoviesList: React.FC = () => {
     return (
-      <div className="container mx-auto min-h-[50vh] flex flex-col gap-5">
+      <div className="container mx-auto min-h-[60vh] flex flex-col gap-5">
         <motion.h1 className="text-lg font-bold md:text-xl lg:text-2xl">
          Danh sách phim Hyper Movie
         </motion.h1>
@@ -63,7 +64,7 @@ export default function Home() {
             {movies.length ? (
               <div>
                 <AnimationWaiting>
-                  <div className="grid grid-cols-2 gap-3 md:gap-5 md:grid-cols-3 lg:grid-cols-6">
+                  <div className="grid grid-cols-2 gap-3 md:gap-5 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6">
                     {movies.map((item) => (
                       <motion.div
                         variants={FADE_RIGHT_ANIMATION_VARIANTS}
@@ -99,10 +100,11 @@ export default function Home() {
 
   return (
     <FramerContainer>
-      <div className="min-h-screen flex flex-col gap-4">
+      <div className="min-h-screen flex flex-col gap-4 pb-10">
         <HeroBanner />
         <FilterMovie onFilter={onFilter} />
         <MoviesList />
+        <ContactForm />
       </div>
     </FramerContainer>
   );
