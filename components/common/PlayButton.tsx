@@ -25,7 +25,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({ hidden, onClick }) => {
         >
           <Image
             hidden={hidden}
-            src="/play-btn.png"
+            src="/play-icon.png"
             alt="play"
             width={50}
             height={0}

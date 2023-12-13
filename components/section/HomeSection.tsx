@@ -17,12 +17,12 @@ import { getListMovies } from "@/services/movie";
 export default function Home() {
   const [movies, setMovies] = useState<MovieModel[]>([]);
   const [pagination, setPagination] = useState<PaginationModel>();
-  const [currentParams, setCurrentParams] = useState<any>({ orderBy: "Year" });
+  const [currentParams, setCurrentParams] = useState<any>();
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-   fetchData({ orderBy: "Year" });
+   fetchData();
   }, []);
 
   const fetchData = async (params?: any) => {
@@ -50,9 +50,9 @@ export default function Home() {
 
   const MoviesList: React.FC = () => {
     return (
-      <div className="container mx-auto flex flex-col gap-5">
+      <div className="container mx-auto min-h-[50vh] flex flex-col gap-5">
         <motion.h1 className="text-lg font-bold md:text-xl lg:text-2xl">
-          Hyper Movies List
+         Danh sách phim Hyper Movie
         </motion.h1>
         {loading ? (
           <div className="mx-auto">
@@ -99,7 +99,7 @@ export default function Home() {
 
   return (
     <FramerContainer>
-      <div className="min-h-screen flex flex-col gap-10">
+      <div className="min-h-screen flex flex-col gap-4">
         <HeroBanner />
         <FilterMovie onFilter={onFilter} />
         <MoviesList />

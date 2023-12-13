@@ -57,6 +57,7 @@ const WatchComponent:React.FC<any> = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true)
       try {
         const data = await getPlayMovie({
           movieId: Number(id),
@@ -68,6 +69,7 @@ const WatchComponent:React.FC<any> = () => {
       } catch (error) {
         console.error("Error fetching data:", error);
       }
+      setLoading(false)
     };
     if (movieInfo) fetchData();
   }, [movieInfo, selectedEpisodeId]);

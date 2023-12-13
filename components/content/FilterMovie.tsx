@@ -3,6 +3,7 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
 } from "@/components/ui/select";
 import {
@@ -13,9 +14,11 @@ import {
   yearOptions,
 } from "@/constants/filter";
 import { motion } from "framer-motion";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import Accordion from "../ui/accordion";
+import { TextAlignBottomIcon } from "@radix-ui/react-icons";
 
 export default function FilterMovie({
   onFilter,
@@ -23,7 +26,7 @@ export default function FilterMovie({
   onFilter: (q: any) => void;
 }) {
   const [keyword, setKeyword] = useState("");
-  const [orderBy, setOrderBy] = useState("Year");
+  const [orderBy, setOrderBy] = useState("");
   const [filmGenres, setFilmGenres] = useState("");
   const [countries, setCountries] = useState("");
   const [typeRaw, setTypeRaw] = useState("");
@@ -32,7 +35,7 @@ export default function FilterMovie({
   const OrderBy: React.FC = () => {
     return (
       <motion.div>
-        <p className="mb-2 text-sm font-bold">Lọc theo</p>
+        <p className="mb-2 font-bold text-sm lg:text-base">Lọc theo</p>
         <Select value={orderBy} onValueChange={setOrderBy}>
           <SelectTrigger>
             {orderByOptions.find((item: any) => item.value === orderBy)
@@ -53,7 +56,7 @@ export default function FilterMovie({
   const FilmGenres: React.FC = () => {
     return (
       <motion.div>
-        <p className="mb-2 text-sm font-bold">Thể loại</p>
+        <p className="mb-2 font-bold text-sm lg:text-base">Thể loại</p>
         <Select value={filmGenres} onValueChange={setFilmGenres}>
           <SelectTrigger>
             {filmGenresOptions.find((item: any) => item.value === filmGenres)
@@ -74,7 +77,7 @@ export default function FilterMovie({
   const Countries: React.FC = () => {
     return (
       <motion.div>
-        <p className="mb-2 text-sm font-bold">Quốc Gia</p>
+        <p className="mb-2 font-bold text-sm lg:text-base">Quốc Gia</p>
         <Select value={countries} onValueChange={setCountries}>
           <SelectTrigger>
             {countriesOptions.find((item: any) => item.value === countries)
@@ -95,7 +98,7 @@ export default function FilterMovie({
   const Year: React.FC = () => {
     return (
       <motion.div>
-        <p className="mb-2 text-sm font-bold">Năm phát hành</p>
+        <p className="mb-2 font-bold text-sm lg:text-base">Năm phát hành</p>
         <Select value={year} onValueChange={setYear}>
           <SelectTrigger>
             {yearOptions.find((item: any) => item.value === year)?.label ||
@@ -116,7 +119,7 @@ export default function FilterMovie({
   const TypeRaw: React.FC = () => {
     return (
       <motion.div>
-        <p className="mb-2 text-sm font-bold">Kiểu phim</p>
+        <p className="mb-2 font-bold text-sm lg:text-base">Kiểu phim</p>
         <Select value={typeRaw} onValueChange={setTypeRaw}>
           <SelectTrigger>
             {typeRawOptions.find((item: any) => item.value === typeRaw)
@@ -157,6 +160,10 @@ export default function FilterMovie({
   };
 
   const handleResetFilter = () => {
+    window.scrollTo({
+      top: window.innerHeight - 100,
+      behavior: "smooth",
+    });
     setFilmGenres("");
     setCountries("");
     setTypeRaw("");
@@ -167,6 +174,10 @@ export default function FilterMovie({
   };
 
   const onSubmit = () => {
+    window.scrollTo({
+      top: window.innerHeight - 100,
+      behavior: "smooth",
+    });
     const q = {
       categoryId: filmGenres,
       countryId: countries,
@@ -181,11 +192,12 @@ export default function FilterMovie({
 
   const Filters: React.FC = () => {
     return (
-      <div className="container mx-auto">
-        <motion.h2 className="text-lg font-bold md:text-xl lg:text-2xl mb-3">
-          Lọc Phim
-        </motion.h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 lg:gap-4 items-end">
+      <div className="container mx-auto z-50 bg-[#09090b] py-5">
+        <motion.div className="text-lg font-bold md:text-xl lg:text-2xl bg-red-600 p-3 md:p-5 rounded-t-md cursor-pointer flex justify-between items-center">
+          Bộ Lọc Hyper Movie
+          <TextAlignBottomIcon width={25} height={25} />
+        </motion.div>
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 lg:gap-4 items-end p-5 border-2 border-t-0 border-red-600 rounded-b-lg">
           <Keyword />
           <OrderBy />
           <TypeRaw />

@@ -7,9 +7,9 @@ function Banner() {
       <Image
         src="/banner.png"
         alt=""
-        width={0}
-        height={0}
-        className="w-auto h-auto max-h-screen object-cover"
+        width={1920}
+        height={1080}
+        className="w-screen h-screen max-h-screen object-cover"
       />
     </div>
   );

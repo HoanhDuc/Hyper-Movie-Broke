@@ -14,11 +14,11 @@ module.exports = {
         "2xl": "1400px",
       },
     },
-    // colors:{
-    //   red: {
-    //     "600": "#ff0000"
-    //   }
-    // },
+    colors:{
+      red: {
+        "600": "#DC2626"
+      }
+    },
     extend: {
       colors: {
         border: "hsl(var(--border))",

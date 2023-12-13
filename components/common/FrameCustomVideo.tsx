@@ -44,7 +44,7 @@ export default function Player({ option, src, getInstance, ...rest }: any) {
       },
       icons: {
         loading: `<div class="loader"></div>`,
-        state: '<img width="150" height="150" class="" src="/play-btn.png" />',
+        state: '<img width="150" height="150" class="" src="/play-icon.png" />',
       },
       moreVideoAttr: {
         crossOrigin: "anonymous",
@@ -107,7 +107,7 @@ export default function Player({ option, src, getInstance, ...rest }: any) {
     <div
       ref={artRef}
       {...rest}
-      className="w-full h-[250px] lg:h-[70vh] mb-3 rounded-xl cursor-pointer overflow-hidden shadow-xl"
+      className="w-full h-[250px] lg:h-[70vh] mb-3 rounded-lg cursor-pointer overflow-hidden shadow-xl"
     >
     </div>
 
