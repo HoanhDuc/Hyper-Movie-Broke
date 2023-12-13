@@ -155,6 +155,8 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
                       src={cast.avatar || defaultImg}
                       alt=""
                       onError={errorImage}
+                      width="auto"
+                      height="auto"
                       className="rounded-md w-12 h-12 lg:w-16 lg:h-16 object-cover"
                     />
                     <div className="text-sm">

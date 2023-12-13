@@ -78,8 +78,8 @@ const SelectItem = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <SelectPrimitive.Item
     ref={ref}
-    aria-labelledby={`${Math.random()}-label-btn`}
-    aria-label={`${Math.random()}-name-btn`}
+    aria-labelledby={`${Math.random()}-label-select`}
+    aria-label={`Next Select Label`}
     className={cn(
       "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       className

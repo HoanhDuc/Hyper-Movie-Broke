@@ -45,8 +45,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
-        aria-labelledby={`${Math.random()}-label-btn`}
-        aria-label={`${Math.random()}-name-btn`}
+        aria-labelledby={`Next Button Labelledby`}
+        aria-label={`Next Button Label`}
+        name={`${Math.random()}-name-btn`}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
