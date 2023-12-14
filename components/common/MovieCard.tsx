@@ -49,7 +49,7 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
   };
 
   const goToWatch = () => {
-    router.push(`watch?id=${movieInfo.id}&name=${movieInfo.link}`);
+    router.push(`watch/${movieInfo.link}`);
   };
 
   const ComingSoonList: React.FC = () => {

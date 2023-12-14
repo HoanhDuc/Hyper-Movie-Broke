@@ -26,7 +26,7 @@ export const getDetailMovie = async (name: string, params?: any) => {
     } = await detailMovie(name, params);
     return { movie, phimSapChieu, trendingMovies };
   } catch (err) {
-    return {};
+    return {error: true}
   }
 };
 

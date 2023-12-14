@@ -6,10 +6,11 @@ import { MovieModel } from "@/models/Movie";
 import { EpisodeModel } from "@/models/Episode";
 
 export const generateMetadata = async (
-  { searchParams }: any,
+  { params, searchParams }: any,
   parent: ResolvingMetadata
 ): Promise<Metadata> => {
-  const { name, id, episodeId } = searchParams;
+  const { name } = params;
+  const { episodeId } = searchParams;
   const prevImages = (await parent).openGraph?.images || [];
   const {
     data: { movie },
@@ -26,17 +27,17 @@ export const generateMetadata = async (
     title: {
       absolute: `Xem ${movieModel?.seoTitle} - ${episodeDp?.name} | Hyper Movie`,
     },
-    description: `${movieModel?.seoDescription} | Hyper Movie`,
+    description: `${movieModel?.seoDescription}`,
     verification: {
       google:
         "google-site-verification=6GjheYtUtr7MSz-zSwn5RdE-7bai55g6u34j6TWzOog",
     },
     openGraph: {
       title: `Xem ${movieModel?.seoTitle} - ${episodeDp?.name} | Hyper Movie`,
-      description: `${movieModel?.seoDescription} | Hyper Movie`,
+      description: `${movieModel?.seoDescription}`,
       images: [movieModel?.thumbnail, ...prevImages],
       siteName: "Hyper Movie",
-      url: `https://hypermovie.fun/watch?id=${id}&name=${name}`,
+      url: `https://hypermovie.fun/watch/${name}`,
     },
     metadataBase: new URL(`https://hypermovie.fun`),
     themeColor: "#000",

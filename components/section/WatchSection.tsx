@@ -2,7 +2,7 @@
 "use client";
 import "@/components/styles/frame.scss";
 import React, { useCallback, useEffect, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams, useParams } from "next/navigation";
 import { MovieModel } from "@/models/Movie";
 import { Button } from "@/components/ui/button";
 import { LinkModel } from "@/models/Link";
@@ -34,9 +34,8 @@ import { getDetailMovie, getPlayMovie } from "@/services/movie";
 const WatchComponent:React.FC<any> = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const {name} = useParams();
   const searchParams = useSearchParams();
-  const id = searchParams.get("id");
-  const name = searchParams.get("name");
   const server = Number(searchParams.get("server")) || 0;
   const [selectedEpisodeId, setSelectedEpisodeId] = useState(
     Number(searchParams.get("episodeId"))
@@ -56,11 +55,11 @@ const WatchComponent:React.FC<any> = () => {
   }, [name]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetch = async () => {
       setLoading(true)
       try {
         const data = await getPlayMovie({
-          movieId: Number(id),
+          movieId: Number(movieInfo?.id),
           episodeId: selectedEpisodeId || movieInfo?.episodes?.[0].id,
         });
         setLoading(false);
@@ -71,14 +70,14 @@ const WatchComponent:React.FC<any> = () => {
       }
       setLoading(false)
     };
-    if (movieInfo) fetchData();
+    if (movieInfo) fetch();
   }, [movieInfo, selectedEpisodeId]);
 
   const handleChangeEpisode = (idEp: number) => {
     window.scroll({ top: 0, behavior: "smooth" });
     setSelectedEpisodeId(idEp);
     router.replace(
-      `${pathname}?id=${id}&name=${name}&episodeId=${idEp}&server=${server}`
+      `${pathname}?episodeId=${idEp}&server=${server}`
     );
   };
 
@@ -86,7 +85,7 @@ const WatchComponent:React.FC<any> = () => {
     window.scroll({ top: 0, behavior: "smooth" });
     setServerSelected(item);
     router.replace(
-      `${pathname}?id=${id}&name=${name}&episodeId=${id}&server=${index}`
+      `${pathname}?episodeId=${selectedEpisodeId}&server=${index}`
     );
   };
 
