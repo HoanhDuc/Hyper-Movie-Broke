@@ -19,7 +19,7 @@ const PaginationCpn: React.FC<PaginationProps> = ({
 }) => {
   const onChangePage = (page: number) => {
     window.scrollTo({
-      top: window.innerHeight - 230,
+      top: 0,
       behavior: "smooth",
     });
     onChange && onChange(page);

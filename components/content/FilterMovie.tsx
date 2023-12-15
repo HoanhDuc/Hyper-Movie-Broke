@@ -162,7 +162,7 @@ export default function FilterMovie({
 
   const handleResetFilter = () => {
     window.scrollTo({
-      top: window.innerHeight - 230,
+      top: 0,
       behavior: "smooth",
     });
     setFilmGenres("");
@@ -176,7 +176,7 @@ export default function FilterMovie({
 
   const onSubmit = () => {
     window.scrollTo({
-      top: window.innerHeight - 230,
+      top: 0,
       behavior: "smooth",
     });
     const q = {
@@ -190,7 +190,6 @@ export default function FilterMovie({
     };
     onFilter(q);
   };
-
 
   const Filters: React.FC = () => {
     return (
