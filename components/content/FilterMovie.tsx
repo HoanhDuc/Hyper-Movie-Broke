@@ -31,7 +31,7 @@ export default function FilterMovie({
   const [countries, setCountries] = useState("");
   const [typeRaw, setTypeRaw] = useState("");
   const [year, setYear] = useState("");
-  const [expanded, setExpanded] = useState<false | number>(0);
+  const [expanded, setExpanded] = useState<boolean>(true);
 
   const OrderBy: React.FC = () => {
     return (
@@ -194,7 +194,7 @@ export default function FilterMovie({
 
   const Filters: React.FC = () => {
     return (
-      <div className="sticky top-16 z-50 bg-[#09090b]">
+      <div className="sticky top-16 z-50">
         <Accordion
           expanded={expanded}
           setExpanded={setExpanded}
@@ -205,7 +205,7 @@ export default function FilterMovie({
             </motion.div>
           }
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-1 gap-2 lg:gap-4 items-end p-5">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-1 gap-2 lg:gap-4 items-end p-5 bg-dark/80 backdrop-blur-md">
             <Keyword />
             <OrderBy />
             <TypeRaw />

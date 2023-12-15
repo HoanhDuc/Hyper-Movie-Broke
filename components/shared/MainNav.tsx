@@ -27,15 +27,15 @@ export default function MainNav() {
 
   return (
     <motion.header
-      className={`fixed w-full top-0 z-[100] transition-all duration-200 ${
-        isScrolled ? "bg-background/80 backdrop-blur-2xl border-b" : ""
+      className={`sticky w-full top-0 z-[100] transition-all duration-200 ${
+        isScrolled ? "bg-dark/60 backdrop-blur-2xl border-b" : ""
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", bounce: 0.25 }}
     >
       <nav
-        className="mx-auto flex max-w-7xl items-center justify-between p-2 lg:px-8"
+        className="mx-auto flex max-w-7xl items-center justify-center p-2 lg:px-8"
         aria-label="Global"
       >
         <Link href={"/"}  aria-label="Back to Home">
@@ -46,10 +46,10 @@ export default function MainNav() {
             height={50}
           />
         </Link>
-        <div className="flex space-x-1 z-50">
+       {/* <div className="flex space-x-1 z-50">
           <LanguageSwitcher />
-          {/* <ModeToggle /> */}
-        </div>
+           <ModeToggle />
+        </div> */}
       </nav>
     </motion.header>
   );

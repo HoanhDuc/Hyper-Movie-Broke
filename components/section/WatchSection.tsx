@@ -223,7 +223,7 @@ const WatchComponent:React.FC<any> = () => {
   },[movieInfo]);
 
   return (
-    <div className="py-14 lg:py-20 container mx-auto">
+    <div className="py-10 container mx-auto">
       {loading ? (
         <div className="w-full flex justify-center items-center h-[80vh]">
           <Loader />

@@ -98,11 +98,11 @@ export default function Home() {
 
   return (
     <FramerContainer>
-      <div className="min-h-screen flex flex-col gap-8 pb-10">
-        <HeroBanner />
-        <motion.h1 className="text-center font-bold text-xl md:text-3xl xl:text-4xl">
+      <div className="min-h-screen flex flex-col gap-8 py-10">
+        {/* <HeroBanner /> */}
+        {/* <motion.h1 className="text-center font-bold text-xl md:text-3xl xl:text-4xl">
           Hyper Movie
-        </motion.h1>
+        </motion.h1> */}
         <div className="container mx-auto flex flex-col lg:flex-row gap-5">
           <div className="lg:w-1/3">
             <FilterMovie onFilter={onFilter} />

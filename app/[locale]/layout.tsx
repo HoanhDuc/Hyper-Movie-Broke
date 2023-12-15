@@ -27,7 +27,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={font.className}>
+      <body className={`${font.className} bg-[url('/background.png')] bg-fixed bg-cover`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             <MainNav />

@@ -17,6 +17,7 @@ module.exports = {
     extend: {
       colors: {
         "hyper-movie": "#DC2626",
+        dark: "#09090b",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

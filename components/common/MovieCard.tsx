@@ -94,7 +94,7 @@ const MovieCard: React.FC<{ movieInfo: MovieModel }> = ({ movieInfo }) => {
 
   return (
     // <Tilt glareEnable glareBorderRadius={"8px"}>
-    <div className="relative overflow-hidden rounded-md">
+    <div className="relative overflow-hidden rounded-md shadow-2xl">
       <div className="cursor-pointer" onClick={openDetail}>
         <img
           src={movieInfo?.poster}
