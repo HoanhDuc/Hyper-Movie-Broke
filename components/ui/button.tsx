@@ -47,7 +47,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         aria-labelledby={`Next Button Labelledby`}
         aria-label={`Next Button Label`}
-        name={`${Math.random()}-name-btn`}
+        name={`name-btn`}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}

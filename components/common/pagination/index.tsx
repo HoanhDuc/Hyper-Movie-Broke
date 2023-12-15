@@ -19,23 +19,32 @@ const PaginationCpn: React.FC<PaginationProps> = ({
 }) => {
   const onChangePage = (page: number) => {
     window.scrollTo({
-      top: window.innerHeight - 100,
+      top: window.innerHeight - 230,
       behavior: "smooth",
     });
     onChange && onChange(page);
   };
 
   return (
-    <Pagination
-      className="pagination-data mt-5 justify-center"
-      onChange={onChangePage}
-      current={currentPage}
-      total={totalItem}
-      pageSize={pageSize}
-      showSizeChanger={false}
-      prevIcon={<p className="text-hyper-movie font-bold text-3xl">-</p>}
-      nextIcon={<p className="text-hyper-movie font-bold text-3xl">+</p>}
-    />
+    <div className="md:flex justify-between items-center mt-5">
+      <p className="mb-0">
+        Showing{" "}
+        <span className="text-green-500">
+          {pageSize}/{totalItem}{" "}
+        </span>
+        Result(s)
+      </p>
+      <Pagination
+        className="pagination-data"
+        onChange={onChangePage}
+        current={currentPage}
+        total={totalItem}
+        pageSize={pageSize}
+        showSizeChanger={false}
+        prevIcon={<p className="text-hyper-movie font-bold text-3xl">-</p>}
+        nextIcon={<p className="text-hyper-movie font-bold text-3xl">+</p>}
+      />
+    </div>
   );
 };
 

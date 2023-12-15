@@ -1,9 +1,9 @@
 import HomeSection from "@/components/section/HomeSection";
 import { Metadata } from "next";
 
-const title = "Hyper Movie | Xem phim miễn phí | Chia sẻ API phim";
+const title = "Hyper Movie | Chill And Free | Xem phim miễn phí";
 const description =
-  "Hyper Movie - Free and Fast Update Movies. Xem phim miễn phí Full HD. Chia sẻ API phim miễn phí";
+  "Hyper Movie - Free and Fast Update Movies. Xem phim miễn phí Full HD tốc độ cao. Giao diện bắt mắt";
 
 export const metadata: Metadata = {
   title,

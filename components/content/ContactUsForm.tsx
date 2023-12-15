@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import AnimationWaiting from "@/components/shared/AnimationWaitingContainer";
@@ -8,8 +8,15 @@ import {
 } from "@/constants/animation";
 
 const ContactForm = () => {
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+
+  const onSendEmail = async () => {};
   return (
     <AnimationWaiting>
+      <div onClick={onSendEmail}>click</div>
+
       <div className="container mx-auto relative rounded-xl">
         <motion.div variants={FADE_LEFT_ANIMATION_VARIANTS}>
           <iframe
@@ -27,7 +34,7 @@ const ContactForm = () => {
             <h2 className="mb-5 md:mb-10 text-2xl md:text-3xl text-center font-bold">
               Contact
             </h2>
-            <form action="#" className="space-y-3 md:space-y-5">
+            <form onSubmit={onSendEmail} className="space-y-3 md:space-y-5">
               <div>
                 <p className="mb-2 font-bold text-sm lg:text-base">Email</p>
                 <input
@@ -57,7 +64,7 @@ const ContactForm = () => {
                   placeholder="Leave a comment..."
                 ></textarea>
               </div>
-              <Button variant={"destructive"} title="">
+              <Button variant={"destructive"} type="submit">
                 Gửi
               </Button>
             </form>

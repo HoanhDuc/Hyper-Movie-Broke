@@ -77,7 +77,7 @@ const WatchComponent:React.FC<any> = () => {
     window.scroll({ top: 0, behavior: "smooth" });
     setSelectedEpisodeId(idEp);
     router.replace(
-      `${pathname}?episodeId=${idEp}&server=${server}`
+      `${pathname}?episodeId=${idEp}`
     );
   };
 
@@ -128,7 +128,7 @@ const WatchComponent:React.FC<any> = () => {
           {servers?.map((item: LinkModel, index: number) => (
             <Button
               key={item.link}
-              variant={index === server ? "destructive" : "default"}
+              variant={item.link === serverSelected?.link ? "destructive" : "default"}
               onClick={() => handleChangeServer(item, index)}
             >
               #{index + 1}

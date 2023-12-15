@@ -23,14 +23,14 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-   fetchData();
+    fetchData();
   }, []);
 
   const fetchData = async (params?: any) => {
     setLoading(true);
     try {
       const { records, pagination }: any = await getListMovies(params);
-     setMovies(records);
+      setMovies(records);
       setPagination(pagination);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -51,20 +51,18 @@ export default function Home() {
 
   const MoviesList: React.FC = () => {
     return (
-      <div className="container mx-auto min-h-[60vh] flex flex-col gap-5">
-        <motion.h1 className="text-lg font-bold md:text-xl lg:text-2xl">
-         Danh sách phim Hyper Movie
-        </motion.h1>
+      <div className="lg:w-[70%]">
         {loading ? (
-          <div className="mx-auto">
+          <div className="mx-auto flex justify-center items-center">
             <Loader />
           </div>
         ) : (
           <>
+     
             {movies.length ? (
               <div>
                 <AnimationWaiting>
-                  <div className="grid grid-cols-2 gap-3 md:gap-5 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6">
+                  <div className="grid grid-cols-2 gap-3 md:gap-5 md:grid-cols-4">
                     {movies.map((item) => (
                       <motion.div
                         variants={FADE_RIGHT_ANIMATION_VARIANTS}
@@ -100,10 +98,17 @@ export default function Home() {
 
   return (
     <FramerContainer>
-      <div className="min-h-screen flex flex-col gap-4 pb-10">
+      <div className="min-h-screen flex flex-col gap-8 pb-10">
         <HeroBanner />
-        <FilterMovie onFilter={onFilter} />
-        <MoviesList />
+        <motion.h1 className="text-center font-bold text-xl md:text-3xl xl:text-4xl">
+          Hyper Movie
+        </motion.h1>
+        <div className="container mx-auto flex flex-col lg:flex-row gap-5">
+          <div className="lg:w-1/3">
+            <FilterMovie onFilter={onFilter} />
+          </div>
+          <MoviesList />
+        </div>
         <ContactForm />
       </div>
     </FramerContainer>
