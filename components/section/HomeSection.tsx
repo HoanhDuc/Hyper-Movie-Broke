@@ -51,18 +51,17 @@ export default function Home() {
 
   const MoviesList: React.FC = () => {
     return (
-      <div className="lg:w-[70%]">
+      <div>
         {loading ? (
           <div className="mx-auto flex justify-center items-center">
             <Loader />
           </div>
         ) : (
           <>
-     
             {movies.length ? (
               <div>
                 <AnimationWaiting>
-                  <div className="grid grid-cols-2 gap-3 md:gap-5 md:grid-cols-4">
+                  <div className="grid grid-cols-2 gap-3 md:gap-5 md:grid-cols-5 lg:grid-cols-6">
                     {movies.map((item) => (
                       <motion.div
                         variants={FADE_RIGHT_ANIMATION_VARIANTS}
@@ -98,17 +97,15 @@ export default function Home() {
 
   return (
     <FramerContainer>
-      <div className="min-h-screen flex flex-col gap-8 py-10">
+      <div className="container mx-auto min-h-screen flex flex-col gap-8 py-10">
         {/* <HeroBanner /> */}
-        {/* <motion.h1 className="text-center font-bold text-xl md:text-3xl xl:text-4xl">
+        <FilterMovie onFilter={onFilter} />
+        <MoviesList />
+        <hr />
+        <motion.h1 className="text-center font-bold text-xl md:text-3xl xl:text-4xl">
           Hyper Movie
-        </motion.h1> */}
-        <div className="container mx-auto flex flex-col lg:flex-row gap-5">
-          <div className="lg:w-1/3">
-            <FilterMovie onFilter={onFilter} />
-          </div>
-          <MoviesList />
-        </div>
+        </motion.h1>
+        <hr />
         <ContactForm />
       </div>
     </FramerContainer>

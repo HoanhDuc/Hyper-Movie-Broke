@@ -18,7 +18,6 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { TextAlignBottomIcon } from "@radix-ui/react-icons";
-import Accordion from "@/components/ui/accordion";
 
 export default function FilterMovie({
   onFilter,
@@ -31,7 +30,6 @@ export default function FilterMovie({
   const [countries, setCountries] = useState("");
   const [typeRaw, setTypeRaw] = useState("");
   const [year, setYear] = useState("");
-  const [expanded, setExpanded] = useState<boolean>(true);
 
   const OrderBy: React.FC = () => {
     return (
@@ -193,32 +191,33 @@ export default function FilterMovie({
 
   const Filters: React.FC = () => {
     return (
-      <div className="sticky top-16 z-50">
-        <Accordion
+      <div className="bg-dark/80 backdrop-blur-md z-50 rounded-md">
+        {/* <Accordion
           expanded={expanded}
           setExpanded={setExpanded}
           header={
-            <motion.div className="text-lg font-bold md:text-xl lg:text-2xl  p-3 md:p-5 cursor-pointer flex justify-between items-center">
-              Lọc Phim
-              <TextAlignBottomIcon width={25} height={25} />
-            </motion.div>
+          
           }
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-1 gap-2 lg:gap-4 items-end p-5 bg-dark/80 backdrop-blur-md">
-            <Keyword />
-            <OrderBy />
-            <TypeRaw />
-            <FilmGenres />
-            <Countries />
-            <Year />
-            <Button variant="destructive" onClick={onSubmit}>
-              Tìm kiếm
-            </Button>
-            <Button variant="secondary" onClick={handleResetFilter}>
-              Xóa tìm kiếm
-            </Button>
-          </div>
-        </Accordion>
+        > */}
+        <motion.div className="text-lg font-bold md:text-xl lg:text-2xl p-3 md:p-5 cursor-pointer flex justify-between items-center">
+          Lọc Phim
+          <TextAlignBottomIcon width={25} height={25} />
+        </motion.div>
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 lg:gap-4 items-end p-5">
+          <Keyword />
+          <OrderBy />
+          <TypeRaw />
+          <FilmGenres />
+          <Countries />
+          <Year />
+          <Button variant="destructive" onClick={onSubmit}>
+            Tìm kiếm
+          </Button>
+          <Button variant="secondary" onClick={handleResetFilter}>
+            Xóa tìm kiếm
+          </Button>
+        </div>
+        {/* </Accordion> */}
       </div>
     );
   };

@@ -15,7 +15,7 @@ const ContactForm = () => {
   const onSendEmail = async () => {};
   return (
     <AnimationWaiting>
-      <div className="container mx-auto relative rounded-xl">
+      <div className="relative rounded-xl">
         <motion.div variants={FADE_LEFT_ANIMATION_VARIANTS}>
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29793.98845989703!2d105.81632122590315!3d21.02273835481374!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab9bd9861ca1%3A0xe7887f7b72ca17a9!2zSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1702492106011!5m2!1svi!2s"
