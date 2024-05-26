@@ -3,16 +3,15 @@ import { PaginationModel } from "@/models/Pagination";
 import { IMovie } from "@/models/interfaces/MovieInterface";
 import { detailMovie, getMovies, playMovie } from "@/repositories/movie";
 
-
 export const getListMovies = async (params?: any) => {
   try {
     const dataFetch = await getMovies(params);
-    const formatData = dataFetch.data?.Records?.map(
+    const formatData = dataFetch.data?.items?.map(
       (item: IMovie) => new MovieModel(item)
     );
     return {
       records: formatData,
-      pagination: new PaginationModel(dataFetch.data?.Pagination),
+      pagination: new PaginationModel(dataFetch.data?.pagination),
     };
   } catch (err) {
     return { records: [], pagination: {} };
@@ -22,24 +21,11 @@ export const getListMovies = async (params?: any) => {
 export const getDetailMovie = async (name: string, params?: any) => {
   try {
     const {
-      data: { movie, phimSapChieu, trendingMovies },
+      data: { movie, episodes },
     } = await detailMovie(name, params);
-    return { movie, phimSapChieu, trendingMovies };
-  } catch (err) {
-    return {error: true}
-  }
-};
 
-
-export const getPlayMovie = async (params: {
-  movieId: number;
-  episodeId?: number;
-  server?: number;
-}) => {
-  try {
-    const { data } = await playMovie(params);
-    return data;
+    return { movie: { ...movie, episodes } };
   } catch (err) {
-    return {};
+    return { error: true };
   }
 };

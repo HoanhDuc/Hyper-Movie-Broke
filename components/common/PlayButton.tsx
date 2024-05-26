@@ -19,19 +19,19 @@ const PlayButton: React.FC<PlayButtonProps> = ({ hidden, onClick }) => {
           onClick();
         }}
       >
-        <p>Play Now</p>
+        {/* <p>Play Now</p> */}
         <motion.div
           animate={{ rotate: loading ? 360 : 0 }}
           transition={{ ease: "linear", duration: 0.5, repeat: Infinity }}
         >
-            <Image
-              hidden={hidden}
-              src="/play-icon.png"
-              alt="play"
-              width={40}
-              height={0}
-              className="object-cover rounded-full cursor-pointer"
-            />
+          <Image
+            hidden={hidden}
+            src="/play-icon.png"
+            alt="play"
+            width={40}
+            height={0}
+            className="w-10 h-10 object-cover rounded-full cursor-pointer"
+          />
         </motion.div>
       </motion.div>
     </div>

@@ -35,18 +35,13 @@ export default function MainNav() {
       transition={{ type: "spring", bounce: 0.25 }}
     >
       <nav
-        className="mx-auto flex max-w-7xl items-center justify-center p-2 lg:px-8"
+        className="mx-auto flex max-w-7xl items-center p-2 lg:px-8"
         aria-label="Global"
       >
-        <Link href={"/"}  aria-label="Back to Home">
-          <Image
-            src={"/logo.png"}
-            alt=""
-            width={150}
-            height={50}
-          />
+        <Link href={"/"} aria-label="Back to Home">
+          <Image src={"/logo.png"} alt="" width={150} height={50} />
         </Link>
-       {/* <div className="flex space-x-1 z-50">
+        {/* <div className="flex space-x-1 z-50">
           <LanguageSwitcher />
            <ModeToggle />
         </div> */}

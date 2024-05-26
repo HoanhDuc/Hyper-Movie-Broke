@@ -7,18 +7,18 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 
-const transporter = nodemailer.createTransport({
-  host: "smtp.mailtrap.io",
-  port: 2525,
-  secure: false,
-  tls: {
-    ciphers: "SSLv3",
-  },
-  auth: {
-    user: process.env.NEXT_PUBLIC_EMAIL_USER,
-    pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD,
-  },
-});
+// const transporter = nodemailer.createTransport({
+//   host: "smtp.mailtrap.io",
+//   port: 2525,
+//   secure: false,
+//   tls: {
+//     ciphers: "SSLv3",
+//   },
+//   auth: {
+//     user: process.env.NEXT_PUBLIC_EMAIL_USER,
+//     pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD,
+//   },
+// });
 
 export const sendEmail = async ({
   from,
@@ -30,14 +30,14 @@ export const sendEmail = async ({
   message: string;
 }) => {
   try {
-    const info = await transporter.sendMail({
-      to: process.env.NEXT_PUBLIC_EMAIL_USER,
-      from,
-      subject,
-      message,
-    });
+    // const info = await transporter.sendMail({
+    //   to: process.env.NEXT_PUBLIC_EMAIL_USER,
+    //   from,
+    //   subject,
+    //   message,
+    // });
 
-    console.log("Email sent:", info.messageId);
+    // console.log("Email sent:", info.messageId);
   } catch (error) {
     console.error("Error sending email:", error);
     throw error;

@@ -18,18 +18,20 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { TextAlignBottomIcon } from "@radix-ui/react-icons";
+import Accordion from "@/components/ui/accordion";
 
 export default function FilterMovie({
   onFilter,
 }: {
   onFilter: (q: any) => void;
 }) {
-  const [keyword, setKeyword] = useState("");
+  const [search, setSearch] = useState("");
   const [orderBy, setOrderBy] = useState("");
-  const [filmGenres, setFilmGenres] = useState("");
-  const [countries, setCountries] = useState("");
+  const [category, setCategory] = useState("");
+  const [country, setCountry] = useState("");
   const [typeRaw, setTypeRaw] = useState("");
   const [year, setYear] = useState("");
+  const [expanded, setExpanded] = useState(false);
 
   const OrderBy: React.FC = () => {
     return (
@@ -56,9 +58,9 @@ export default function FilterMovie({
     return (
       <motion.div>
         <p className="mb-2 font-bold text-sm lg:text-base">Thể loại</p>
-        <Select value={filmGenres} onValueChange={setFilmGenres}>
+        <Select value={category} onValueChange={setCategory}>
           <SelectTrigger>
-            {filmGenresOptions.find((item: any) => item.value === filmGenres)
+            {filmGenresOptions.find((item: any) => item.value === category)
               ?.label || "All"}
           </SelectTrigger>
           <SelectContent>
@@ -77,9 +79,9 @@ export default function FilterMovie({
     return (
       <motion.div>
         <p className="mb-2 font-bold text-sm lg:text-base">Quốc Gia</p>
-        <Select value={countries} onValueChange={setCountries}>
+        <Select value={country} onValueChange={setCountry}>
           <SelectTrigger>
-            {countriesOptions.find((item: any) => item.value === countries)
+            {countriesOptions.find((item: any) => item.value === country)
               ?.label || "All"}
           </SelectTrigger>
           <SelectContent>
@@ -140,7 +142,7 @@ export default function FilterMovie({
     return (
       <Input
         name="input-keyword"
-        defaultValue={keyword}
+        defaultValue={search}
         key={Math.random() * 36.4621596072}
         placeholder="Nhập kí tự"
         onKeyUp={(e: any) => {
@@ -155,7 +157,7 @@ export default function FilterMovie({
 
   const handleChangeKeyword = (e: any) => {
     e.preventDefault();
-    setKeyword(e.target.value);
+    setSearch(e.target.value);
   };
 
   const handleResetFilter = () => {
@@ -163,10 +165,10 @@ export default function FilterMovie({
       top: 0,
       behavior: "smooth",
     });
-    setFilmGenres("");
-    setCountries("");
+    setCategory("");
+    setCountry("");
     setTypeRaw("");
-    setKeyword("");
+    setSearch("");
     setOrderBy("");
     setYear("");
     onFilter({});
@@ -178,13 +180,13 @@ export default function FilterMovie({
       behavior: "smooth",
     });
     const q = {
-      categoryId: filmGenres,
-      countryId: countries,
-      typeRaw: typeRaw,
-      statusRaw: "",
-      year: year,
-      orderBy: orderBy,
-      search: keyword,
+      category,
+      country,
+      type: typeRaw,
+      status: "",
+      year,
+      orderBy,
+      search: search || "godzilla",
     };
     onFilter(q);
   };
@@ -192,17 +194,14 @@ export default function FilterMovie({
   const Filters: React.FC = () => {
     return (
       <div className="bg-dark/80 backdrop-blur-md z-50 rounded-md">
-        {/* <Accordion
-          expanded={expanded}
-          setExpanded={setExpanded}
-          header={
-          
-          }
-        > */}
-        <motion.div className="text-lg font-bold md:text-xl lg:text-2xl p-3 md:p-5 cursor-pointer flex justify-between items-center">
+        {/* <Accordion expanded={expanded} setExpanded={setExpanded}> */}
+        {/* <motion.div
+          className="bg-hyper-movie text-lg font-bold md:text-xl lg:text-2xl p-3 md:p-5 cursor-pointer flex justify-between items-center"
+          onClick={() => setExpanded(true)}
+        >
           Lọc Phim
           <TextAlignBottomIcon width={25} height={25} />
-        </motion.div>
+        </motion.div> */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 lg:gap-4 items-end p-5">
           <Keyword />
           <OrderBy />

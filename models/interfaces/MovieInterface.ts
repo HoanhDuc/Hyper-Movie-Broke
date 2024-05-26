@@ -1,47 +1,63 @@
 import { CastModel } from "@/models/Cast";
 export interface IMovie {
-  Banner: string;
-  Quanlity: string;
-  Id: number;
-  Name: string;
-  OtherName: string;
-  Avatar: string;
-  Description: string;
-  ViewNumber: string;
-  EpisodesTotal: number;
-  Status: number;
-  TypeId: number;
-  Year: number;
-  Director: string;
-  Time: string;
-  Trailer: string;
-  Link: string;
-  ShowTimes: string;
-  SearchText: string;
-  SeoTitle: string;
-  SeoDescription: string;
-  Keyword: string;
-  StatusTitle: string;
-  SeoKeywords: string;
-  OriginalLink: string;
-  CastString: string;
-  TypeRaw: string;
-  StatusRaw: string;
-  Countries: ICountry[];
-  Categories: ICategory[];
-  Casts: ICast[];
-  Episodes: IEpisodes[];
-  EpisodeTrailer: IEpisodes[];
-  PlayUrl: string;
-  AvatarImage: string;
-  AvatarImageThumb: string;
-  Tags: string[];
-  NewTags: INewTag[];
-  DirectorDto: IDirectorDto[];
-  CastDto: ICastDto[];
-  CreatedOn: string;
-  UpdateOn: string;
-  LokLokMovie: boolean;
+  modified: {
+    time: string;
+  };
+  _id: number;
+  name: string;
+  slug: string;
+  origin_name: string;
+  episode_current: string;
+  episode_total: string;
+  quality: string;
+  lang: string;
+  imdb_rating: string;
+  thumb_url: string;
+  poster_url: string;
+  year: number;
+  time_loading: number;
+  created: string;
+  content: string;
+  type: string;
+  status: string;
+  is_copyright: string;
+  sub_docquyen: string;
+  chieurap: string;
+  trailer_url: string;
+  time: string;
+  notify: any;
+  showtimes: string;
+  view: number;
+  actor: string;
+  director: string;
+  category: string;
+  country: string;
+  episodes: {
+    server_name: string;
+    server_data: ServerDaum[];
+  }[];
+  // tmdb: Tmdb;
+  // imdb: Imdb;
+  // export interface Tmdb {
+  //   type: string
+  //   id: string
+  //   season: string
+  //   vote_average: string
+  //   vote_count: number
+  // }
+
+  // export interface Imdb {
+  //   id: string
+  //   rating: string
+  // }
+}
+
+export interface ServerDaum {
+  name: string;
+  slug: string;
+  filename: string;
+  link_embed: string;
+  link_m3u8: string;
 }
 
 export interface ICountry {
@@ -80,19 +96,20 @@ export interface ICastDto {
 }
 
 export interface IEpisodes {
-  Id: number;
-  EpisodeNumber: number;
-  Status: boolean;
-  ProductId: number;
-  Name: string;
-  Keyword: string;
-  FullLink: string;
-  Type: number;
-  CreateOn: string;
+  server_name: string;
+  server_data: ServerDaum[];
 }
+export interface ServerDaum {
+  name: string;
+  slug: string;
+  filename: string;
+  link_embed: string;
+  link_m3u8: string;
+}
+
 export interface IPagination {
-  PageIndex: number;
-  PageSize: number;
-  PageCount: number;
-  TotalRecords: number;
+  totalItems: number;
+  totalItemsPerPage: number;
+  currentPage: string;
+  totalPages: number;
 }

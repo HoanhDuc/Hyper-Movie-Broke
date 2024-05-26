@@ -7,7 +7,11 @@ import { Toaster } from "@/components/ui/toaster";
 import MainNav from "@/components/shared/MainNav";
 import Footer from "@/components/shared/footer";
 import { NextIntlClientProvider } from "next-intl";
-const font = Sawarabi_Gothic({weight:"400",subsets:["latin"], display:'swap' });
+const font = Sawarabi_Gothic({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default async function RootLayout({
   children,
@@ -27,7 +31,8 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={`${font.className} bg-[url('/background.png')] bg-fixed bg-cover`}>
+      {/* bg-[url('/background.png')] */}
+      <body className={`${font.className} bg-fixed bg-cover`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             <MainNav />

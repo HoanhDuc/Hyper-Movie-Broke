@@ -126,17 +126,18 @@
 ::-webkit-scrollbar {
   position: absolute;
   width: 5px;
+  display: none;
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #DC2626;
+  background: #000000;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #b30000;
+  background: #000000;
 }
-.ant-select-selector{
+.ant-select-selector {
   background-color: #000;
 }
 //loader
@@ -167,7 +168,7 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border-left: 4px solid #DC2626;
+  border-left: 4px solid #dc2626;
   border-bottom: 4px solid transparent;
   animation: rotation 0.5s linear infinite reverse;
 }
@@ -179,16 +180,16 @@
     transform: rotate(360deg);
   }
 }
-.spinner{
-position:absolute;
-top:48%;
-left:48%;
-display:none;
-border:8px solid rgba(0,0,0,.1);
-border-left-color:red;
-height:60px;
-width:60px;
-border-radius:50%;
-animation: spin 1s linear infinite;
-z-index:999;
+.spinner {
+  position: absolute;
+  top: 48%;
+  left: 48%;
+  display: none;
+  border: 8px solid rgba(0, 0, 0, 0.1);
+  border-left-color: red;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 999;
 }

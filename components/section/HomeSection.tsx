@@ -21,9 +21,10 @@ export default function Home() {
   const [currentParams, setCurrentParams] = useState<any>();
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [keySearch, setKeySearch] = useState("");
 
   useEffect(() => {
-    fetchData();
+    fetchData({ page: 1, search: "godzilla" });
   }, []);
 
   const fetchData = async (params?: any) => {
@@ -40,13 +41,14 @@ export default function Home() {
 
   const onPageChange = (pageNumber: number) => {
     setPage(pageNumber);
-    fetchData({ ...currentParams, pageNumber: pageNumber });
+    fetchData({ ...currentParams, page: pageNumber });
   };
 
   const onFilter = (params: any) => {
     setPage(1);
     setCurrentParams(params);
     fetchData(params);
+    setKeySearch(params?.search || "");
   };
 
   const MoviesList: React.FC = () => {
@@ -58,37 +60,55 @@ export default function Home() {
           </div>
         ) : (
           <>
-            {movies.length ? (
-              <div>
-                <AnimationWaiting>
-                  <div className="grid grid-cols-2 gap-3 md:gap-5 md:grid-cols-5 lg:grid-cols-6">
-                    {movies.map((item) => (
-                      <motion.div
-                        variants={FADE_RIGHT_ANIMATION_VARIANTS}
-                        key={item.id}
-                      >
-                        <MovieCard movieInfo={item} />
-                      </motion.div>
-                    ))}
-                  </div>
-                </AnimationWaiting>
-                <Pagination
-                  currentPage={page}
-                  // pageSize={pagination?.pageSize}
-                  totalPages={pagination?.pageCount}
-                  totalItem={pagination?.totalRecords}
-                  onChange={onPageChange}
-                />
-              </div>
-            ) : (
-              <Image
-                src="/empty.png"
-                alt="play"
-                width={500}
-                height={200}
-                className="object-cover mx-auto"
-              />
-            )}
+            {
+              movies.length ? (
+                <div>
+                  <AnimationWaiting>
+                    <div className="grid grid-cols-2 gap-5 md:gap-7 md:grid-cols-5 lg:grid-cols-5">
+                      {movies.map((item) => (
+                        <motion.div
+                          variants={FADE_RIGHT_ANIMATION_VARIANTS}
+                          key={item.id}
+                        >
+                          <MovieCard movieInfo={item} />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </AnimationWaiting>
+                  <Pagination
+                    currentPage={page}
+                    pageSize={pagination?.pageSize}
+                    totalPages={pagination?.pageCount}
+                    totalItem={pagination?.totalRecords}
+                    onChange={onPageChange}
+                  />
+                </div>
+              ) : (
+                <div className="mx-auto p-5 border rounded">
+                  <p className="text-lg lg:text-xl mb-5">
+                    Không có kết quả nào để hiển thị với &quot;
+                    <span className="text-hyper-movie">{keySearch}</span>&quot;
+                  </p>{" "}
+                  Gợi ý:
+                  <ul>
+                    <li>
+                      - Hãy chắc chắn rằng tất cả các từ đều đúng chính tả.
+                    </li>
+                    <li> - Hãy thử các từ khóa khác nhau.</li>
+                    <li> - Thử những từ khóa thông thường hơn.</li>
+                  </ul>
+                </div>
+              )
+              // (
+              //   <Image
+              //     src="/empty.png"
+              //     alt="play"
+              //     width={500}
+              //     height={200}
+              //     className="object-cover mx-auto"
+              //   />
+              // )
+            }
           </>
         )}
       </div>
@@ -101,12 +121,12 @@ export default function Home() {
         {/* <HeroBanner /> */}
         <FilterMovie onFilter={onFilter} />
         <MoviesList />
-        <hr />
+        {/* <hr />
         <motion.h1 className="text-center font-bold text-xl md:text-3xl xl:text-4xl">
           Hyper Movie
         </motion.h1>
-        <hr />
-        <ContactForm />
+        <hr /> */}
+        {/* <ContactForm /> */}
       </div>
     </FramerContainer>
   );

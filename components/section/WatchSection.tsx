@@ -2,10 +2,14 @@
 "use client";
 import "@/components/styles/frame.scss";
 import React, { useCallback, useEffect, useState } from "react";
-import { usePathname, useRouter, useSearchParams, useParams } from "next/navigation";
+import {
+  usePathname,
+  useRouter,
+  useSearchParams,
+  useParams,
+} from "next/navigation";
 import { MovieModel } from "@/models/Movie";
 import { Button } from "@/components/ui/button";
-import { LinkModel } from "@/models/Link";
 import { EpisodeModel } from "@/models/Episode";
 import { motion } from "framer-motion";
 import {
@@ -28,89 +32,79 @@ import {
   FacebookMessengerShareButton,
   FacebookMessengerIcon,
 } from "next-share";
-import { getDetailMovie, getPlayMovie } from "@/services/movie";
+import { getDetailMovie } from "@/services/movie";
+import { ServerDaum } from "@/models/interfaces/MovieInterface";
 
-
-const WatchComponent:React.FC<any> = () => {
+const WatchComponent: React.FC<any> = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const {name} = useParams();
+  const { name } = useParams();
   const searchParams = useSearchParams();
   const server = Number(searchParams.get("server")) || 0;
-  const [selectedEpisodeId, setSelectedEpisodeId] = useState(
-    Number(searchParams.get("episodeId"))
-  );
   const [loading, setLoading] = useState(false);
   const [movieInfo, setMovieInfo] = useState<MovieModel>();
-  const [servers, setServers] = useState<LinkModel[]>();
-  const [serverSelected, setServerSelected] = useState<LinkModel>();
+  const [servers, setServers] = useState<ServerDaum[]>();
+  const [serverSelected, setServerSelected] = useState<ServerDaum>();
 
   useEffect(() => {
     const fetch = async () => {
-      setLoading(true)
+      setLoading(true);
       const { movie }: any = await getDetailMovie(name as string);
       setMovieInfo(new MovieModel(movie));
+      setServers(new MovieModel(movie).episodes[0].serverData);
+      setLoading(false);
     };
-    if (name) fetch()
+    if (name) fetch();
   }, [name]);
 
   useEffect(() => {
-    const fetch = async () => {
-      setLoading(true)
-      try {
-        const data = await getPlayMovie({
-          movieId: Number(movieInfo?.id),
-          episodeId: selectedEpisodeId || movieInfo?.episodes?.[0].id,
-        });
-        setLoading(false);
-        setServerSelected(new LinkModel(data?.[0]));
-        setServers(data.map((item: any) => new LinkModel(item)));
-      } catch (error) {
-        console.error("Error fetching data:", error);
+    if (movieInfo?.id) {
+      if (searchParams.get("episodeId")) {
+        setServerSelected(
+          movieInfo.episodes[0].serverData[
+            Number(searchParams.get("episodeId"))
+          ]
+        );
+        return;
       }
-      setLoading(false)
-    };
-    if (movieInfo) fetch();
-  }, [movieInfo, selectedEpisodeId]);
+      setServerSelected(movieInfo.episodes[0].serverData[0]);
+      console.log(movieInfo.episodes[0].serverData[0]);
+    }
+  }, [movieInfo]);
 
   const handleChangeEpisode = (idEp: number) => {
     window.scroll({ top: 0, behavior: "smooth" });
-    setSelectedEpisodeId(idEp);
-    router.replace(
-      `${pathname}?episodeId=${idEp}`
-    );
+    setServerSelected(movieInfo?.episodes[0].serverData[idEp]);
+    router.replace(`${pathname}?episodeId=${idEp}`);
   };
 
-  const handleChangeServer = (item: LinkModel, index: number) => {
+  const handleChangeServer = (item: ServerDaum, index: number) => {
     window.scroll({ top: 0, behavior: "smooth" });
     setServerSelected(item);
     router.replace(
-      `${pathname}?episodeId=${selectedEpisodeId}&server=${index}`
+      `${pathname}?episodeId=${Number(
+        searchParams.get("episodeId")
+      )}&server=${index}`
     );
   };
 
   const Episodes: React.FC = () => {
     return (
       <section
-        hidden={
-          !movieInfo?.episodes?.length || movieInfo?.episodes?.length <= 1
-        }
+        className="max-h-[300px] overflow-auto"
+        hidden={!servers?.length || servers?.length <= 1}
       >
-        <p className="font-bold md:text-lg lg:text-xl mb-2">Danh sách tập</p>
+        <p className="font-bold md:text-lg lg:text-xl mb-2">
+          Danh sách tập phim
+        </p>
         <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-3">
-          {movieInfo?.episodes?.map((item: EpisodeModel, index: number) => (
+          {servers?.map((item: ServerDaum, index: number) => (
             <Button
-              key={item.id}
+              key={item.slug}
               variant={
-                (
-                  selectedEpisodeId
-                    ? item.id === selectedEpisodeId
-                    : index === 0
-                )
-                  ? "destructive"
-                  : "default"
+                item.slug === serverSelected?.slug ? "destructive" : "default"
               }
-              onClick={() => handleChangeEpisode(item.id)}
+              onClick={() => handleChangeEpisode(index)}
             >
               {item.name}
             </Button>
@@ -122,17 +116,17 @@ const WatchComponent:React.FC<any> = () => {
 
   const Servers: React.FC = () => {
     return (
-      <section hidden={!servers?.length || servers?.length <= 1}>
-        <p className="font-bold md:text-lg lg:text-xl mb-2">Danh sách nguồn</p>
+      <section
+        hidden={
+          !movieInfo?.episodes?.length || movieInfo?.episodes?.length <= 0
+        }
+      >
+        <p className="font-bold md:text-lg lg:text-xl mb-2">
+          Servers (Developing...)
+        </p>
         <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-3">
-          {servers?.map((item: LinkModel, index: number) => (
-            <Button
-              key={item.link}
-              variant={item.link === serverSelected?.link ? "destructive" : "default"}
-              onClick={() => handleChangeServer(item, index)}
-            >
-              #{index + 1}
-            </Button>
+          {movieInfo?.episodes?.map((item: EpisodeModel, index: number) => (
+            <Button key={item.serverName}>{item.serverName}</Button>
           ))}
         </div>
       </section>
@@ -187,54 +181,58 @@ const WatchComponent:React.FC<any> = () => {
   const ShareBlock: React.FC = useCallback(() => {
     return (
       <>
-      {movieInfo && <div className="flex gap-3">
-        <p className="text-xl font-bold">Chia sẻ: </p>
-        <FacebookShareButton
-          url={window.location.href}
-          quote={movieInfo?.name}
-          hashtag={"#hypermovie"}
-        >
-          <FacebookIcon size={32} round />
-        </FacebookShareButton>
-        <TelegramShareButton
-          url={window.location.href}
-          title={movieInfo?.name}
-        >
-          <TelegramIcon size={32} round />
-        </TelegramShareButton>
-        <TwitterShareButton
-          url={window.location.href}
-          title={movieInfo?.name}
-        >
-          <TwitterIcon size={32} round />
-        </TwitterShareButton>
-        <LinkedinShareButton url={window.location.href}>
-          <LinkedinIcon size={32} round />
-        </LinkedinShareButton>
-        <FacebookMessengerShareButton
-          url={window.location.href}
-          appId="4639220812794134"
-        >
-          <FacebookMessengerIcon size={32} round />
-        </FacebookMessengerShareButton>
-      </div>}
+        {movieInfo && (
+          <div className="flex gap-3">
+            <p className="text-xl font-bold">Chia sẻ: </p>
+            <FacebookShareButton
+              url={window.location.href}
+              quote={movieInfo?.name}
+              hashtag={"#hypermovie"}
+            >
+              <FacebookIcon size={32} round />
+            </FacebookShareButton>
+            <TelegramShareButton
+              url={window.location.href}
+              title={movieInfo?.name}
+            >
+              <TelegramIcon size={32} round />
+            </TelegramShareButton>
+            <TwitterShareButton
+              url={window.location.href}
+              title={movieInfo?.name}
+            >
+              <TwitterIcon size={32} round />
+            </TwitterShareButton>
+            <LinkedinShareButton url={window.location.href}>
+              <LinkedinIcon size={32} round />
+            </LinkedinShareButton>
+            <FacebookMessengerShareButton
+              url={window.location.href}
+              appId="4639220812794134"
+            >
+              <FacebookMessengerIcon size={32} round />
+            </FacebookMessengerShareButton>
+          </div>
+        )}
       </>
     );
-  },[movieInfo]);
+  }, [movieInfo]);
 
   return (
-    <div className="py-10 container mx-auto">
+    <div>
       {loading ? (
         <div className="w-full flex justify-center items-center h-[80vh]">
           <Loader />
         </div>
       ) : (
-        <div className="flex flex-col gap-3 lg:gap-5">
-          <FrameCustomVideo src={serverSelected?.link} />
-          <ShareBlock />
-          <Servers />
-          <Episodes />
-          <MovieInfo />
+        <div className="">
+          <FrameCustomVideo src={serverSelected?.link_m3u8} />
+          <div className="py-10 container mx-auto flex flex-col gap-3 lg:gap-5">
+            <ShareBlock />
+            <MovieInfo />
+            <Servers />
+            <Episodes />
+          </div>
         </div>
       )}
     </div>

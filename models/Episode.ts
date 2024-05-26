@@ -1,30 +1,24 @@
-import { IEpisodes } from "./interfaces/MovieInterface";
+import { IEpisodes, ServerDaum } from "./interfaces/MovieInterface";
 
 export class EpisodeModel {
-  private _Id: number;
-  private _EpisodeNumber: number;
-  private _Status: boolean;
-  private _ProductId: number;
-  private _Name: string;
-  private _Keyword: string;
-  private _FullLink: string;
-  private _Type: number;
-  private _CreateOn: string;
+  private _serverName: string;
+  private _serverData: ServerDaum[];
+
   constructor(ep: IEpisodes) {
-    this._Id = ep.Id;
-    this._EpisodeNumber = ep.EpisodeNumber;
-    this._Status = ep.Status;
-    this._ProductId = ep.ProductId;
-    this._Name = ep.Name;
-    this._Keyword = ep.Keyword;
-    this._FullLink = ep.FullLink;
-    this._Type = ep.Type;
-    this._CreateOn = ep.CreateOn;
+    this._serverName = ep.server_name;
+    this._serverData = ep.server_data.map((data: ServerDaum) => ({
+      name: data.name,
+      slug: data.slug,
+      filename: data.filename,
+      link_embed: data.link_embed,
+      link_m3u8: data.link_m3u8,
+    }));
   }
-  get id(): number {
-    return this._Id;
+  get serverName() {
+    return this._serverName;
   }
-  get name(): string {
-    return this._Name;
+
+  get serverData() {
+    return this._serverData;
   }
 }
